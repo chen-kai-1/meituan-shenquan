@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #author:fugui
 
@@ -82,7 +82,7 @@ def getserverkey():
                 print("若您想🙏每天被移动端(如微信)通知，则建议开启通知\n")
                 yesornot=input("是否开启移动端推送(y/n),输入其他字符均为默认关闭推送:\n")
                 print("获取serverkey请访问:https://sct.ftqq.com/\n")
-                serverkey=input("请输入serverkey:\n")
+                serverkey=input("请输入serverkey(若上一步选择为n,此处可乱写):\n")
             except:
                 pass
             if type(yesornot)==str and (yesornot =="n" or yesornot=='y') and type(serverkey)==str  and serverkey !="":
@@ -634,6 +634,34 @@ def myRedBeanRecords(token):
         if hasattr(e,"reason"):
             print(e,"reason")    
 
+#定义查询红包池函数
+def queryredpool(token):
+    wm_latitude = getVar()[0]
+    wm_longitude = getVar()[1]
+    print("### *开始执行查询红包池详情脚本* ###:\n")
+    datas = "parActivityId="+parActivityId+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+str(token)+"&wm_ctype="+wm_ctype
+    url_myredbeanRecords = baseurl+r"/cfeplay/playcenter/batchgrabred/corepage"
+    request =urllib.request.Request(url_myredbeanRecords,headers=head,data=datas.encode("utf-8"),method="POST")
+    try:
+        response = urllib.request.urlopen(request,timeout=5)
+        result = response.read().decode("utf-8")
+        result2 = json.loads(result)
+
+        if(result2["code"]==0 and result2["subcode"]==0 and len(result2["data"]["awardInfos"])):
+            for k in result2["data"]["awardInfos"]:
+                print("**%s元红包池总量:%d,剩余%s张**\n"%(k["showPriceNumberYuan"],k["sendStock"],k["leftStock"]))
+        elif (result2["code"]==1 and result2["subcode"]==-1):
+            print("token失效,导致获取活动信息失败！%s\n"%(result2["msg"]))
+        else:
+            print("请求接口失效或参数异常，建议🙏重置参数!\n")
+    except urllib.error.URLError as e:
+        if hasattr(e,"code"):
+            print("脚本执行失败👀，错误代码如下:\n")
+            print(e.code)
+        if hasattr(e,"reason"):
+            print(e,"reason")    
+   
+
 
 #定义server 酱的消息推送方法
 def serverjiang():
@@ -697,6 +725,7 @@ def main():
     sys.stdout = Logger('./output.txt')
     token = getVar()[2]
     signForBeans(token)
+    queryredpool(token)
     batchId = getbatchId(token)
     drawlottery(batchId,token)
     if(int(showPriceNumber)<500):
