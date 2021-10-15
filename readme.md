@@ -61,7 +61,7 @@
  ###  ###
 ## 脚本运行后推送server 酱效果展示: ##
 
-[![image.png](https://img30.360buyimg.com/pop/jfs/t1/211928/18/400/3186526/61684712Ef5ec3a67/cd3d1ce86fede2f9.png)](https://img30.360buyimg.com/pop/jfs/t1/211928/18/400/3186526/61684712Ef5ec3a67/cd3d1ce86fede2f9.png)
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/206801/36/5447/3928857/61691181E0e80bb5f/ed30b59e9084d572.png)](https://img30.360buyimg.com/pop/jfs/t1/206801/36/5447/3928857/61691181E0e80bb5f/ed30b59e9084d572.png)
  #  #
 
  ### 天天神券活动页面展示  ###
