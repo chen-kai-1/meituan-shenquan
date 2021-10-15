@@ -138,7 +138,7 @@ def getlatlongitude():
 def myredbean(token):
     wm_latitude = 1
     wm_longitude = 1
-    print("开始执行查询proid 和 needNumber参数脚本:\n")
+    print("开始执行从美团接口查询proid 和 needNumber参数脚本:\n")
     datas = "parActivityId="+parActivityId+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+str(token)+"&userPortraitId="+str(portraitId)
     url_drawlottery = baseurl+r"/cfeplay/playcenter/batchgrabred/myRedBean"
     request =urllib.request.Request(url_drawlottery,headers=head,data=datas.encode("utf-8"),method="POST")
@@ -153,7 +153,7 @@ def myredbean(token):
                 cent=cent+1
             print("一般这几类必中符金额依次为5元 8元 10元,大概率使用后兑换到20-5，25-8,30-10的红包，建议选择第二类即可\n")
         elif (result2["code"]==1 and result2["subcode"]==-1):
-            print("%s\n"%(result2["msg"]))
+            print("%s,原因:输入token失效或错误 请继续运行程序并输入，脚本将在运行一遍后自动删除异常配置文件!!\n"%(result2["msg"]))
         else:
             print("请求接口失效或参数异常，建议🙏重置参数!\n")
             sys.exit(0)
@@ -189,6 +189,7 @@ def getVar():
         os.remove(r"./wm_latitudewm_longitude.txt")
         os.remove(r"./token.txt")
         os.remove(r"./propId_Coinnumbe.txt")
+        os.remove(r"./serverkey.txt")
         sys.exit(0)
     file1 = open(r"./wm_latitudewm_longitude.txt", mode='r',encoding="UTF-8")
     wm_latitude  = int(file1.readline())
@@ -210,6 +211,7 @@ def getVar():
         os.remove(r"./wm_latitudewm_longitude.txt")
         os.remove(r"./token.txt")
         os.remove(r"./propId_Coinnumbe.txt")
+        os.remove(r"./serverkey.txt")
         sys.exit(0)
     file3 = open(r"./propId_Coinnumbe.txt", mode='r',encoding="UTF-8")
     propId  = int(file3.readline())
@@ -227,6 +229,7 @@ def serverkeyvar():
         os.remove(r"./wm_latitudewm_longitude.txt")
         os.remove(r"./token.txt")
         os.remove(r"./propId_Coinnumbe.txt")
+        os.remove(r"./serverkey.txt")
         sys.exit(0)
     serverkey  = file.readline()
     file.close()
@@ -256,7 +259,11 @@ def getbatchId(token):
                 sys.exit(0)
 
         elif (result2["code"]==1):
-            print("%s,接口需提交的参数已改变👀，请在github提交issues待作者解决！\n"%(result2["msg"]))
+            print("%s,接口需提交的token参数已改变👀,请重新运行一遍脚本！\n"%(result2["msg"]))
+            os.remove(r"./wm_latitudewm_longitude.txt")
+            os.remove(r"./token.txt")
+            os.remove(r"./propId_Coinnumbe.txt")
+            os.remove(r"./serverkey.txt")
             sys.exit(0)
         else:
             print("获取batchId错误👀，请检查网络，否则为接口失效！\n")
@@ -289,7 +296,7 @@ def signForBeans(token):
         elif (result2["code"]==1):
             print("👴未到领取时间或已经领取完了(每天可领7次,每次间隔需半小时\n)！")
         elif (result2["code"]==7):
-            print("token已失效，请手动🙏删除所有配置文件，重新运行获取token脚本，建议接入server酱通知！\n")
+            print("token已失效，请检查是否已自动删除所有配置文件，若未自动删除，请手动🙏删除所有配置文件并重新运行脚本，最后温馨提示:建议接入server酱通知！\n")
         else:
             print("请求接口失效或网络不佳，请稍后再试!\n")
 
