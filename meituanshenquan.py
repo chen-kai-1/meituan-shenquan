@@ -40,7 +40,7 @@ head={"Host": "i.waimai.meituan.com","User-Agent":"MeituanGroup/11.9.208","x-req
 baseurl=r"https://i.waimai.meituan.com"
 
 #定义全局变量并初始化 以下初始化赋值的变量不要改！！！！
-global  wm_latitude,wm_longitude,token,showPriceNumber,propIdforuse,eight,ten,fifteen,thirty,fifty,eight_left,ten_left,fifteen_left,thirty_left,fifty_left
+global  wm_latitude,wm_longitude,token,showPriceNumber,propIdforuse,eight,ten,fifteen,ten_left,fifteen_left,cwd
 showPriceNumber = "1"
 wm_latitude =1.0
 wm_longitude=1.0
@@ -50,6 +50,7 @@ exchangeCoinNumber=1.0
 serverkey=""
 yesornot = ""
 propIdforuse =2
+cwd = os.path.dirname(os.path.realpath(__file__))
 
 ##############################################################################
 ##标记这四类红包数量不为空，用来在有10元以上必中符时循环判断红包池余量抢购大额元红包，若您不需该功能，请自行将下一行的1改为0
@@ -87,7 +88,7 @@ class Logger(object):
 def getserverkey():
     global yesornot
     global serverkey
-    if  os.path.exists(r"./serverkey.txt"):
+    if  os.path.exists(str(cwd)+r"/serverkey.txt"):
         # file1 = open(r"./token.txt", mode='r',encoding="UTF-8")
         # token = file1.readline()
         # file1.close
@@ -107,15 +108,15 @@ def getserverkey():
             if type(yesornot)==str and (yesornot =="n" or yesornot=='y') and type(serverkey)==str  and serverkey !="":
                 break
             
-        file =open(r"./serverkey.txt", mode='w+',encoding="UTF-8")
+        file =open(str(cwd)+r"/serverkey.txt", mode='w+',encoding="UTF-8")
         file.write(serverkey)
         file.close
         return serverkey
 
 #获取token
 def gettoken():
-    if  os.path.exists(r"./token.txt"):
-        file1 = open(r"./token.txt", mode='r',encoding="UTF-8")
+    if  os.path.exists(str(cwd)+r"/token.txt"):
+        file1 = open(str(cwd)+r"/token.txt", mode='r',encoding="UTF-8")
         token = file1.readline()
         file1.close
         return token
@@ -129,14 +130,14 @@ def gettoken():
                 pass
             if type(token)==str  and token !="":
                 break
-        file =open(r"./token.txt", mode='w+',encoding="UTF-8")
+        file =open(str(cwd)+r"/token.txt", mode='w+',encoding="UTF-8")
         file.write(token)
         file.close
         return token
 
 #获取经纬度函数并存入当前目录文本(美团活动为随机地点固定半年以上,各地大额红包概率可能不同，若长期小额，可尝试换地址或换号)
 def getlatlongitude():
-    if os.path.exists(r"./wm_latitudewm_longitude.txt"):
+    if os.path.exists(str(cwd)+r"/wm_latitudewm_longitude.txt"):
         return -1
     else:
         while True:
@@ -149,7 +150,7 @@ def getlatlongitude():
                 pass
             if type(wm_latitude)==int and type(wm_longitude)==int :
                 break
-        file =open(r"./wm_latitudewm_longitude.txt", mode='w+',encoding="UTF-8")
+        file =open(str(cwd)+r"/wm_latitudewm_longitude.txt", mode='w+',encoding="UTF-8")
         file.write(str(wm_latitude)+"\n"+str(wm_longitude))
         file.close
 
@@ -185,7 +186,7 @@ def myredbean(token):
 
 #定义获得需要兑换的必中符道具类型和兑换所需的豆子
 def getpropId_Coinnumber(token):
-    if  os.path.exists(r"./propId_Coinnumbe.txt"):
+    if  os.path.exists(str(cwd)+r"/propId_Coinnumbe.txt"):
         return -1
     else:
         while True:
@@ -199,42 +200,43 @@ def getpropId_Coinnumber(token):
                 if propId == 2 or propId == 4 or propId == 5:
                     if exchangeCoinNumber ==500 or exchangeCoinNumber ==1000 or exchangeCoinNumber ==1800 :
                         break
-        file =open(r"./propId_Coinnumbe.txt", mode='w+',encoding="UTF-8")
+        file =open(str(cwd)+r"/propId_Coinnumbe.txt", mode='w+',encoding="UTF-8")
         file.write(str(propId)+"\n"+str(exchangeCoinNumber))
         file.close
 
 #定义从文本文件中获取存入变量的函数,第二次运行时不用输入，若需改变经纬度和token，则直接删除文件即可
 def getVar():
-    if not os.path.exists(r"./wm_latitudewm_longitude.txt"):
+    if not os.path.exists(str(cwd)+r"/wm_latitudewm_longitude.txt"):
         print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-        os.remove(r"./wm_latitudewm_longitude.txt")
-        os.remove(r"./token.txt")
-        os.remove(r"./propId_Coinnumbe.txt")
-        os.remove(r"./serverkey.txt")
+        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        os.remove(str(cwd)+r"/token.txt")
+        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        os.remove(str(cwd)+r"/serverkey.txt")
         sys.exit(0)
-    file1 = open(r"./wm_latitudewm_longitude.txt", mode='r',encoding="UTF-8")
+    file1 = open(str(cwd)+r"/wm_latitudewm_longitude.txt", mode='r',encoding="UTF-8")
     wm_latitude  = int(file1.readline())
     wm_longitude = int(file1.readline())  
     file1.close()
 
-    file2 = open(r"./token.txt", mode='r',encoding="UTF-8")
-    if not os.path.exists(r"./token.txt"):
+    file2 = open(str(cwd)+r"/token.txt", mode='r',encoding="UTF-8")
+    if not os.path.exists(str(cwd)+r"/token.txt"):
         print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-        os.remove(r"./wm_latitudewm_longitude.txt")
-        os.remove(r"./token.txt")
-        os.remove(r"./propId_Coinnumbe.txt")
+        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        os.remove(str(cwd)+r"/token.txt")
+        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        os.remove(str(cwd)+r"/serverkey.txt")
         sys.exit(0)
     token  = file2.readline()
     file2.close()
 
-    if not os.path.exists(r"./propId_Coinnumbe.txt"):
+    if not os.path.exists(str(cwd)+r"/propId_Coinnumbe.txt"):
         print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-        os.remove(r"./wm_latitudewm_longitude.txt")
-        os.remove(r"./token.txt")
-        os.remove(r"./propId_Coinnumbe.txt")
-        os.remove(r"./serverkey.txt")
+        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        os.remove(str(cwd)+r"/token.txt")
+        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        os.remove(str(cwd)+r"/serverkey.txt")
         sys.exit(0)
-    file3 = open(r"./propId_Coinnumbe.txt", mode='r',encoding="UTF-8")
+    file3 = open(str(cwd)+r"/propId_Coinnumbe.txt", mode='r',encoding="UTF-8")
     propId  = int(file3.readline())
     exchangeCoinNumber = int(file3.readline())  
     file3.close()
@@ -244,13 +246,13 @@ def getVar():
 
 ##获得serverkey
 def serverkeyvar():
-    file = open(r"./serverkey.txt", mode='r',encoding="UTF-8")
-    if not os.path.exists(r"./serverkey.txt"):
+    file = open(str(cwd)+r"/serverkey.txt", mode='r',encoding="UTF-8")
+    if not os.path.exists(str(cwd)+r"/serverkey.txt"):
         print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-        os.remove(r"./wm_latitudewm_longitude.txt")
-        os.remove(r"./token.txt")
-        os.remove(r"./propId_Coinnumbe.txt")
-        os.remove(r"./serverkey.txt")
+        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        os.remove(str(cwd)+r"/token.txt")
+        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        os.remove(str(cwd)+r"/serverkey.txt")
         sys.exit(0)
     serverkey  = file.readline()
     file.close()
@@ -281,10 +283,10 @@ def getbatchId(token):
 
         elif (result2["code"]==1):
             print("%s,接口需提交的token参数已改变👀,请重新运行一遍脚本！\n"%(result2["msg"]))
-            os.remove(r"./wm_latitudewm_longitude.txt")
-            os.remove(r"./token.txt")
-            os.remove(r"./propId_Coinnumbe.txt")
-            os.remove(r"./serverkey.txt")
+            os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+            os.remove(str(cwd)+r"/token.txt")
+            os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+            os.remove(str(cwd)+r"/serverkey.txt")
             sys.exit(0)
         else:
             print("获取batchId错误👀，请检查网络，否则为接口失效！\n")
