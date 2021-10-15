@@ -53,7 +53,7 @@ eight = ten = fifteen = thirty =1
 class Logger(object):
     def __init__(self, fileN='Default.log'):
         self.terminal = sys.stdout
-        self.log = open(fileN, 'w+')
+        self.log = open(fileN, 'w+',encoding='utf-8')
 
     def write(self, message):
         '''print实际相当于sys.stdout.write'''
