@@ -17,6 +17,12 @@ d_time1 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '17:0
 d_time2 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '21:00', '%Y-%m-%d%H:%M')
 n_time = datetime.datetime.now()
 
+#定义抢大额红包时间段d_time4和d_time5之间
+global d_time4,d_time5
+d_time4 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '17:00', '%Y-%m-%d%H:%M')
+d_time5 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '23:59', '%Y-%m-%d%H:%M')
+
+
  #关闭ssl校验，用于抓包调试请求
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -34,7 +40,7 @@ head={"Host": "i.waimai.meituan.com","User-Agent":"MeituanGroup/11.9.208","x-req
 baseurl=r"https://i.waimai.meituan.com"
 
 #定义全局变量并初始化 以下初始化赋值的变量不要改！！！！
-global  wm_latitude,wm_longitude,token,showPriceNumber,propIdforuse,eight,ten,fifteen,thirty
+global  wm_latitude,wm_longitude,token,showPriceNumber,propIdforuse,eight,ten,fifteen,thirty,fifty,eight_left,ten_left,fifteen_left,thirty_left,fifty_left
 showPriceNumber = "1"
 wm_latitude =1.0
 wm_longitude=1.0
@@ -44,9 +50,18 @@ exchangeCoinNumber=1.0
 serverkey=""
 yesornot = ""
 propIdforuse =2
-##标记这四类红包数量不为空，用来放弃15元抢购30元红包，若您不需该功能，请自行将下一行的1改为0
-eight = ten = fifteen = thirty =1
 
+##############################################################################
+##标记这四类红包数量不为空，用来在有10元以上必中符时循环判断红包池余量抢购大额元红包，若您不需该功能，请自行将下一行的1改为0
+eight = ten = fifteen = thirty =fifty=1
+##############################################################################
+# eight_left= 10
+# thirty_left=1
+# fifty_left=1
+################################################################################
+#若在您自定义的抢大额红包时间段中，您无法通过10元以上必中符抢到任何红包！！，则请将下面两行数值改大些，如改成10左右的数字
+ten_left=0
+fifteen_left=0
 
 
 #将print内容同步写到output.txt文件
@@ -176,7 +191,7 @@ def getpropId_Coinnumber(token):
         while True:
             myredbean(token)
             try:
-                propId=eval(input("请输入所需要兑换道具的porpId(如4):\n"))
+                propId=eval(input("请输入所需要兑换道具的propId(如4):\n"))
                 exchangeCoinNumber=eval(input("请输入propId对应某类必中符所需的豆子数量(如1000):\n"))
             except:
                 pass
@@ -454,7 +469,7 @@ def querymyreward(token):
                 print("总计已领取%d个红包,其中已过期%d个😅,有效%d个\n"%(cent,count,cent-count))
             else:
                 if isover15==1:
-                    print("恭喜你领取到价值30元以上的限时红包,具体价值如上所示!!总计已领取%d个红包,其中已过期%d个😅,有效%d个\n"%(cent,count,cent-count))
+                    print("恭喜你领取大额限时红包,具体价值如上所示!!总计已领取%d个红包,其中已过期%d个😅,有效%d个\n"%(cent,count,cent-count))
             print("\n")
         elif (result2["code"]==1):
             print("%s\n"%(result2["msg"]))
@@ -557,9 +572,9 @@ def querymyProps(token):
             if (count!=0):
                  print("总计%d个必中符道具,已过期%d个😅,有效%d个\n"%(cent,count,cent-count))
             if ((cent-count)!=0):
-                print("### **注意:接下来抢红包🧧时将自动为您使用道具库中第一个道具!!** ###")
+                print("### **注意:下次抢红包🧧时将自动为您使用道具库中第一个道具!!** ###")
             else:
-                print("### **注意:道具库无有效道具，无法使用必中符,接下来使用默认参数抢红包(拼手气😅)!!** ###")
+                print("### **注意:道具库无有效道具，无法使用必中符,下次抢红包将使用默认参数抢红包(拼手气😅)!!** ###")
 
             print("\n")
         elif (result2["code"]==7):
@@ -658,30 +673,36 @@ def myRedBeanRecords(token):
         if hasattr(e,"reason"):
             print(e,"reason")    
 
-#定义查询红包池函数
+
+
+
+#定义查询红包池函数 
 def queryredpool(token):
     wm_latitude = getVar()[0]
     wm_longitude = getVar()[1]
-    print("### *开始执行查询红包池详情脚本* ###:\n")
+    print("### *开始执行查询红包池详情脚本:* ###\n")
     datas = "parActivityId="+parActivityId+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+str(token)+"&wm_ctype="+wm_ctype
     url_myredbeanRecords = baseurl+r"/cfeplay/playcenter/batchgrabred/corepage"
     request =urllib.request.Request(url_myredbeanRecords,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
+        global eight,ten,fifteen,thirty,fifty,eight_left,ten_left,fifteen_left,thirty_left,fifty_left
         response = urllib.request.urlopen(request,timeout=5)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
 
         if(result2["code"]==0 and result2["subcode"]==0 and len(result2["data"]["awardInfos"])):
             for k in result2["data"]["awardInfos"]:
-                if (round(float(k["showPriceNumberYuan"]))==8 and k["leftStock"]==0):
-                    eight = 0
-                if (round(float(k["showPriceNumberYuan"]))==10 and k["leftStock"]==0):
+                # if (round(float(k["showPriceNumberYuan"]))==8 and k["leftStock"]==eight_left):
+                #     eight = 0
+                if (round(float(k["showPriceNumberYuan"]))==10 and k["leftStock"]==ten_left):
                     ten = 0
-                if (round(float(k["showPriceNumberYuan"]))==15 and k["leftStock"]==0):
+                if (round(float(k["showPriceNumberYuan"]))==15 and k["leftStock"]==fifteen_left):
                     fifteen = 0
-                if (round(float(k["showPriceNumberYuan"]))==30 and k["leftStock"]==0):
-                    thirty = 0
-                print("**%s元红包池总量:%d张,剩余%s张**\n"%(k["showPriceNumberYuan"],k["sendStock"],k["leftStock"]))
+                # if (round(float(k["showPriceNumberYuan"]))==30 and k["leftStock"]==thirty_left):
+                #     thirty = 0
+                # if (round(float(k["showPriceNumberYuan"]))==50 and k["leftStock"]==fifty_left):
+                #     fifty = 0
+                print("**%s元红包池总量:%d张,已被领取:%s张,剩余%s张**\n"%(k["showPriceNumberYuan"],k["totalStock"],k["sendStock"],k["leftStock"]))
                 
         elif (result2["code"]==1 and result2["subcode"]==-1):
             print("token失效,导致获取活动信息失败！%s\n"%(result2["msg"]))
@@ -758,26 +779,52 @@ def main():
     sys.stdout = Logger('./output.txt')
     token = getVar()[2]
     signForBeans(token)
+    #
     queryredpool(token)
     batchId = getbatchId(token)
+    ##先去保持每天签到 以获得必中符或者豆子
+    doAction(token)
+    exchange(token)   
     querymyProps(token)
-    if(propIdforuse ==5 ):
-        ##跳出循环的条件是15没了或者30没了或者15 30都没了
-        while fifteen ==1 and thirty==1 :
-            queryredpool(token)
+    
+    #定义bool类型变量判断当前时间段是不是自定义的大额抢红包时间段
+    istimeforbig= (n_time <d_time5) and(n_time>d_time4)
+    if(istimeforbig ):
+        
+
+        if propIdforuse ==5:
+            print("### **当前符合抢30元以上大额红包的条件** ###")
+            print("### **正使用15元必中符为您尝试抢30元以上的红包** ###")
+                ##拥有15块以上的必中符，先等待着试图抢30,要是15没了，就直接去抢30的红包，或许有可能抢到50
+            while  fifteen ==1 :
+                queryredpool(token)
+
+
+        if propIdforuse ==3:
+            print("### **当前符合抢30元以上大额红包的条件** ###")
+            print("### **正使用15元必中符为您尝试抢30元以上的红包** ###")
+                ##拥有10块以上的必中符，先等待着试图抢30,要是10和15都没了，就直接去抢30的红包，或许有可能抢到50
+
+            while  fifteen ==1 :
+                if ten ==0 :
+                    queryredpool(token)
+                while ten ==1:
+                    queryredpool(token)
+
+
+
+
+                
+             
     drawlottery(batchId,token,propIdforuse)
-    if(propIdforuse ==5 ):
-        if(fifteen == 0 and thirty ==1):
-            print("### **已等到红包池中15元红包被清空,30元红包还有剩余😄，开始利用超大额必中符(此类必中符面值一般为15元)执行抢红包脚本！** ###")  
+
     if(int(showPriceNumber)<500):
         redtobean(batchId,token)
     else:
         acceptRed(batchId,token)
     querymyreward(token)
     sendTaskRedBean(token)
-    doAction(token)
     querymyProps(token)
-    exchange(token)
     myRedBeanRecords(token)
     sys.stdout = temp
     if(yesornot == "y"):
