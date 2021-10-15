@@ -16,6 +16,7 @@
 # #
 ## 美团token获取方法 ##
 ### 获取token的方式:百度搜[美团](https://www.meituan.com/)，若谷歌浏览器登陆网页版美团若登录时的异常验证提交点不动，请更换safari等其他浏览器尝试即可.登录后在美团首页F12检查，点击network，刷新网页，拖进度条点击第一个请求，然后复制请求头中cookie 的token字段，注意只要token字段，格式为"token={token};"中的{token}字段，不带分号，更不是整个cookie。
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/204166/23/11541/512124/6168cea1Ef1540fe6/de62fb75e02d62c8.png)](https://img30.360buyimg.com/pop/jfs/t1/204166/23/11541/512124/6168cea1Ef1540fe6/de62fb75e02d62c8.png)
 ### 或者使用浏览器插件 [editthiscookie](https://www.editthiscookie.com/) 也可快速获得token字段 ###
 # #
 ## 脚本兼容性解答 ##
@@ -45,9 +46,6 @@
 # #
 ### 欢迎访问[个人博客](https://armbian.icu) ###
 
-
-
-![image.png](https://img30.360buyimg.com/pop/jfs/t1/204166/23/11541/512124/6168cea1Ef1540fe6/de62fb75e02d62c8.png)
 
 
  ###  ###
