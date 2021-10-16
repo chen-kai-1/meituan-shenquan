@@ -2,6 +2,8 @@
 [![followers](https://img.shields.io/badge/dynamic/json?color=%09%2300BFFF&label=Github&prefix=followers%3A&query=%24.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dgithub%26queryKey%3DfuguiKz)](https://img.shields.io/badge/dynamic/json?color=%09%2300BFFF&label=Github&prefix=followers%3A&query=%24.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dgithub%26queryKey%3DfuguiKz)
 [![author:fugui](https://img.shields.io/badge/author-fuguiKz-brightgreen)](https://img.shields.io/badge/author-fuguiKz-brightgreen)
 [![MIT](https://img.shields.io/badge/license-MIT-brightgreen)](https://img.shields.io/badge/license-MIT-brightgreen)
+## 求star 求关注 拒绝白嫖 呜呜呜  ##
+[![6af89bc8gw1f8q48ds6y9g205k046aas.gif](https://img30.360buyimg.com/pop/jfs/t1/206851/38/5699/37222/616ae4e0E962e8669/c497dffab436fec1.gif)](https://img30.360buyimg.com/pop/jfs/t1/206851/38/5699/37222/616ae4e0E962e8669/c497dffab436fec1.gif)
 ## 支持功能 ##
 ### 一.每日自动签到领美团豆(可兑换红包必中符),每日可领七次 ###
 ### 二.每日自动抢天天神券(道具库中若有任意面值必中符，则自动使用。抢红包开放时间为北京时间11点,17点,21点) ###
@@ -11,11 +13,19 @@
 ### 六.接入第三方微信推送平台 ###
 ### 七.自动查询红包池红包🧧详情  ###
 # #
+## 新增[pushPlus](https://www.pushPlus.plus) 推送 ##
+###  此推送每天限额200次 对比server酱每天5次的免费推送，推荐使用pushPlus ###
+### [pushPlus](https://www.pushPlus.plus) 与[server酱](https://sct.ftqq.com/)默认使用的推送接口已被微信放弃,停止服务时间待定，故请尽量采用到企业微信机器人推送 ###
+### [企业微信机器人webhook获取方式](https://juejin.cn/post/6844903887212642312) ###
+### 建议pushPlus和server酱推送均使用企业微信机器人推送渠道，需下载企业微信，申请机器人记住webhook,pushPlus需**按照下图在脚本开头**填写webhook 地址，server酱webhook地址不用填在脚本里，只需在server 酱网页端选择推送渠道并填写即可 ###
+# #
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/217881/11/615/215705/616ab2ebEa559bfe6/e32d58baeeded5ae.png)](https://img30.360buyimg.com/pop/jfs/t1/217881/11/615/215705/616ab2ebEa559bfe6/e32d58baeeded5ae.png)
+# # 
 ## 新增自定义时间段执行尝试领30元以上红包功能 ##
 ### 对尝试以下领取30元以上红包功能自定义时间段(默认下午17点到晚上23点59分，几率较大)，即在设置的时间段内，且有10元以上必中符，才会尝试领取30元以上红包，否则在其他时间段会直接使用必中符抢红包，不会尝试去等15元以上红包领完才去抢。 ###
-### 自定义时间段如下图55行后所示 ###
+### 所有可自定义时间段如下图23行后所示 ###
 # #
-[![image.png](https://img30.360buyimg.com/pop/jfs/t1/214806/2/562/284072/61698babE7a683777/a5e3b14a8430a2fa.png)](https://img30.360buyimg.com/pop/jfs/t1/214806/2/562/284072/61698babE7a683777/a5e3b14a8430a2fa.png)
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/218877/38/636/366119/616ab3c3E3faaf88f/e9150bf2a9db296c.png)](https://img30.360buyimg.com/pop/jfs/t1/218877/38/636/366119/616ab3c3E3faaf88f/e9150bf2a9db296c.png)
 # #
 ## 新增尝试领取30元以上红包功能 ##
 ### 一、当道具库拥有10元以上面值必中符时(若想用红包豆领到限量的15元必中符，则需在脚本第一次初始化变量时将propId填为5,每天三点准时运行一遍脚本),自动尝试等待红包池中15元被清空后领取30元以上红包，小概率成功事件 ###
