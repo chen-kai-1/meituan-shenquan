@@ -44,6 +44,9 @@ portraitId=498
 head={"Host": "i.waimai.meituan.com","User-Agent":"MeituanGroup/11.9.208","x-requested-with": "XMLHttpRequest","content-type":"application/x-www-form-urlencoded"} 
 #定义美团外卖服务器地址
 baseurl=r"https://i.waimai.meituan.com"
+#定义 pushPlus 的webhook地址，用于企业微信等渠道的推送，默认为空，若采用企业微信，请手动填写
+global webhook
+webhook = ""
 
 #定义全局变量并初始化 以下初始化赋值的变量不要改！！！！
 global propIdforuse
@@ -800,6 +803,7 @@ def queryredpool(token):
    
 #定义pushPlus的消息推送函数
 def pushPlus():
+    global webhook
     pushPlusToken = pushPlusTokenvar()
     if not os.path.exists(str(cwd)+r"/output.txt"):
         print("output.txt文件异常,推送退出！🙌")
@@ -812,7 +816,7 @@ def pushPlus():
     pushurl="https://www.pushplus.plus/send"
     head_server ={"Host": "www.pushplus.plus","User-Agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Mobile Safari/537.36","content-type":"application/x-www-form-urlencoded"}
     print("**开始执行pushPlus推送脚本:**\n")
-    datas=bytes(urllib.parse.urlencode({"title":"天天神券推送","content":message,"token":pushPlusToken,"template":"markdown","channel":"wechat","webhook":"","callbackUrl":""}),encoding="UTF-8")
+    datas=bytes(urllib.parse.urlencode({"title":"天天神券推送","content":message,"token":pushPlusToken,"template":"markdown","channel":"wechat","webhook":webhook,"callbackUrl":""}),encoding="UTF-8")
     request =urllib.request.Request(pushurl,headers=head_server,data=datas,method="POST")
     try:
         response = urllib.request.urlopen(request,timeout=30)
