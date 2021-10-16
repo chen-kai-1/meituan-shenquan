@@ -695,7 +695,7 @@ def exchange(token):
         url_exchange = baseurl+r"/cfeplay/playcenter/batchgrabred/exchange"
         request =urllib.request.Request(url_exchange,headers=head,data=datas.encode("utf-8"),method="POST")
         try:
-            response = urllib.request.urlopen(request,timeout=10)
+            response = urllib.request.urlopen(request)
             result = response.read().decode("utf-8")
             result2 = json.loads(result)
             if(result2["code"]==0 and result2["subcode"]==0):
@@ -772,12 +772,14 @@ def queryredpool(token):
     request =urllib.request.Request(url_myredbeanRecords,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
         global eight,ten,fifteen,thirty,fifty,eight_left,ten_left,fifteen_left,thirty_left,fifty_left
-        response = urllib.request.urlopen(request,timeout=10)
+        response = urllib.request.urlopen(request)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
 
         if(result2["code"]==0 and result2["subcode"]==0 and len(result2["data"]["awardInfos"])):
             for k in result2["data"]["awardInfos"]:
+                if"leftStock" not in k:
+                    print("该地区没有红包池，脚本异常退出！")
                 # if (round(float(k["showPriceNumberYuan"]))==8 and k["leftStock"]==eight_left):
                 #     eight = 0
                 if (round(float(k["showPriceNumberYuan"]))==10 and k["leftStock"]==ten_left):
@@ -788,7 +790,8 @@ def queryredpool(token):
                 #     thirty = 0
                 # if (round(float(k["showPriceNumberYuan"]))==50 and k["leftStock"]==fifty_left):
                 #     fifty = 0
-                print("*红包池中%s元总量:%d张,已被领取:%s张,剩余%s张*\n"%(k["showPriceNumberYuan"],k["totalStock"],k["sendStock"],k["leftStock"]))
+                if k["showPriceNumberYuan"]=="50" or k["showPriceNumberYuan"]=="30" or k["showPriceNumberYuan"]=="15":
+                    print("*红包池中%s元总量:%d张,已被领取:%d张,剩余%d张*\n"%(k["showPriceNumberYuan"],k["totalStock"],k["sendStock"],k["leftStock"]))
                 
         elif (result2["code"]==1 and result2["subcode"]==-1):
             print("token失效,导致获取活动信息失败！%s\n"%(result2["msg"]))
@@ -899,8 +902,6 @@ def main():
     doAction(token)
     exchange(token)   
     querymyProps(token)
-    print(propIdforuse)
-    
     #定义bool类型变量判断当前时间段是不是自定义的大额抢红包时间段
     istimeforbig= (n_time <d_time5) and(n_time>d_time4)
     if(istimeforbig ):
@@ -909,6 +910,8 @@ def main():
             print("**正使用15元必中符为您尝试抢30元以上的红包**")
                 ##拥有15块以上的必中符，先等待着试图抢30,要是15没了，就直接去抢30的红包，或许有可能抢到50
             while  fifteen ==1 :
+                if(thirty ==0 and fifty ==0):
+                    break
                 queryredpool(token)
 
         if propIdforuse ==3:
@@ -917,6 +920,8 @@ def main():
                 ##拥有10块以上的必中符，先等待着试图抢30,要是10和15都没了，就直接去抢30的红包，或许有可能抢到50
 
             while  fifteen ==1 :
+                if(thirty ==0 and fifty ==0):
+                    break
                 if ten ==0 :
                     queryredpool(token)
                 while ten ==1:
