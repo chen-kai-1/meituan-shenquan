@@ -210,7 +210,7 @@ def myredbean(token):
     url_drawlottery = baseurl+r"/cfeplay/playcenter/batchgrabred/myRedBean"
     request =urllib.request.Request(url_drawlottery,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
         cent = 1
@@ -339,7 +339,7 @@ def getbatchId(token):
     url_getbatchId = baseurl+r"/cfeplay/playcenter/batchgrabred/corepage"
     request =urllib.request.Request(url_getbatchId,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
         # print(result2)
@@ -380,7 +380,7 @@ def signForBeans(token):
     url_signforbeans = baseurl+r"/cfeplay/playcenter/batchgrabred/drawPoints/v2"
     request =urllib.request.Request(url_signforbeans,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
         # print(result2)
@@ -412,7 +412,7 @@ def drawlottery(batchId,token,propIdforuse):
     url_drawlottery = baseurl+r"/cfeplay/playcenter/batchgrabred/drawlottery"
     request =urllib.request.Request(url_drawlottery,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
         # print(result2)
@@ -450,7 +450,7 @@ def acceptRed(batchId,token):
     url_acceptRed = baseurl+r"/cfeplay/playcenter/batchgrabred/acceptRed"
     request =urllib.request.Request(url_acceptRed,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
         # print(result2)
@@ -480,7 +480,7 @@ def redtobean(batchId,token):
     url_drawlottery = baseurl+r"/cfeplay/playcenter/batchgrabred/redToBean"
     request =urllib.request.Request(url_drawlottery,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
         # print(result2)
@@ -514,7 +514,7 @@ def querymyreward(token):
     url_querymyreward = baseurl+r"/cfeplay/playcenter/batchgrabred/myreward"
     request =urllib.request.Request(url_querymyreward,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
         # print(result2)
@@ -568,7 +568,7 @@ def sendTaskRedBean(token):
     url_sendTaskRedBean = baseurl+r"/cfeplay/playcenter/batchgrabred/sendTaskRedBean"
     request =urllib.request.Request(url_sendTaskRedBean,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
         if(result2["status"]==0):
@@ -596,7 +596,7 @@ def doAction(token):
     url_doaction = baseurl+r"/cfeplay/playcenter/batchgrabred/doAction"
     request =urllib.request.Request(url_doaction,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
         if(result2["code"]==0 and result2["data"]["signDays"]!=0):
@@ -625,7 +625,7 @@ def querymyProps(token):
     url_querymyprops = baseurl+r"/cfeplay/playcenter/batchgrabred/myProps"
     request =urllib.request.Request(url_querymyprops,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
         if(result2["code"]==0 and len(result2["data"])):
@@ -695,7 +695,7 @@ def exchange(token):
         url_exchange = baseurl+r"/cfeplay/playcenter/batchgrabred/exchange"
         request =urllib.request.Request(url_exchange,headers=head,data=datas.encode("utf-8"),method="POST")
         try:
-            response = urllib.request.urlopen(request,timeout=5)
+            response = urllib.request.urlopen(request,timeout=10)
             result = response.read().decode("utf-8")
             result2 = json.loads(result)
             if(result2["code"]==0 and result2["subcode"]==0):
@@ -735,7 +735,7 @@ def myRedBeanRecords(token):
     url_myredbeanRecords = baseurl+r"/cfeplay/playcenter/batchgrabred/myRedBeanRecords"
     request =urllib.request.Request(url_myredbeanRecords,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
         cent=1
@@ -772,7 +772,7 @@ def queryredpool(token):
     request =urllib.request.Request(url_myredbeanRecords,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
         global eight,ten,fifteen,thirty,fifty,eight_left,ten_left,fifteen_left,thirty_left,fifty_left
-        response = urllib.request.urlopen(request,timeout=5)
+        response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
 
