@@ -722,10 +722,10 @@ def queryredpool(token):
 #定义server 酱的消息推送方法
 def serverjiang():
     serverkey = serverkeyvar()
-    if not os.path.exists(r"./output.txt"):
+    if not os.path.exists(str(cwd)+r"/output.txt"):
         print("output.txt文件异常,推送退出！🙌")
         return -1
-    file4= open(r"./output.txt", mode='r',encoding="UTF-8")
+    file4= open(str(cwd)+r"/output.txt", mode='r',encoding="UTF-8")
     pp =''
     message = str(file4.read())
 
@@ -778,7 +778,7 @@ def main():
     token = gettoken()
     getlatlongitude()
     getpropId_Coinnumber(token)
-    sys.stdout = Logger('./output.txt')
+    sys.stdout = Logger(str(cwd)+r'/output.txt')
     token = getVar()[2]
     signForBeans(token)
     #
