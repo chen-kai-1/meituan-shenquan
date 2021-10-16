@@ -861,7 +861,7 @@ def serverjiang():
             url_checkurl = pushurl+"push?id="+pushid+"&readkey="+readkey
             request2 = urllib.request.Request(url_checkurl,headers=head_server,data=datas)
             try:
-                response2 = urllib.request.urlopen(request2,timeout=10)
+                response2 = urllib.request.urlopen(request2,timeout=30)
                 text=json.loads(response2.read().decode("utf-8"))
                 if(text["data"]["title"] =="天天神券推送"):
                     print("server酱推送成功😄！请在移动设备端查看\n")
