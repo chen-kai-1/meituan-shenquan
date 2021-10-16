@@ -26,7 +26,7 @@ d_time5 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '23:5
 
 #定义几点后不使用必中符,注意是不使用！！！如下面的17点,也就是17点之后的抽奖不会使用必中符,以节约道具库中的有效的必中符
 global d_time6
-d_time5 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '17.00', '%Y-%m-%d%H:%M')
+d_time6 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '17.00', '%Y-%m-%d%H:%M')
 
 
  #关闭ssl校验，用于抓包调试请求
@@ -922,7 +922,7 @@ def main():
                 while ten ==1:
                     queryredpool(token)              
     
-    if n_time >d_time  :
+    if n_time >d_time6  :
         propIdforuse =1      
     drawlottery(batchId,token,propIdforuse)
 
