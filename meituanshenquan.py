@@ -788,7 +788,7 @@ def queryredpool(token):
                 #     thirty = 0
                 # if (round(float(k["showPriceNumberYuan"]))==50 and k["leftStock"]==fifty_left):
                 #     fifty = 0
-                print("*%s元红包池总量:%d张,已被领取:%s张,剩余%s张*\n"%(k["showPriceNumberYuan"],k["totalStock"],k["sendStock"],k["leftStock"]))
+                print("*红包池中%s元总量:%d张,已被领取:%s张,剩余%s张*\n"%(k["showPriceNumberYuan"],k["totalStock"],k["sendStock"],k["leftStock"]))
                 
         elif (result2["code"]==1 and result2["subcode"]==-1):
             print("token失效,导致获取活动信息失败！%s\n"%(result2["msg"]))
