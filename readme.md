@@ -78,13 +78,13 @@
 ###   *选择你会用的终编辑器，如vim等*  ###
 ### 若需 每天11点、14点、17点、21点、0点后的一个小时内的0分，1分，32分运行一次脚本,则可按如下设置 ###
 # #
-### 14点为运行美团豆兑换必中符时间段，0点为补充每天的签到领红包豆次数，其他时间段为抢红包时间段，重复一小时意在防止失败！！ ###
+### 14点为运行美团豆兑换必中符时间段，0,1,2,3点为补充每天的签到领红包豆次数，其他时间段为抢红包时间段! ###
 # #
 ![image.png](https://img30.360buyimg.com/pop/jfs/t1/215764/28/426/39105/6168d739E5d72d02e/b4e3e96aebd87543.png)
-###   0,1,32 11,14,17,21,0 *  *  * /usr/bin/env python3  /testUser/meituanshenquan.py ###
+###   0 11,14,17,21,0,1,2,3 *  *  * /usr/bin/env python3  /testUser/meituanshenquan.py ###
 # #
 ### crontab 配置如下图 ###
-[![image.png](https://img30.360buyimg.com/pop/jfs/t1/199223/23/13364/69700/61698d55E245d3bcc/fe909ad5fecfeede.png)](https://img30.360buyimg.com/pop/jfs/t1/199223/23/13364/69700/61698d55E245d3bcc/fe909ad5fecfeede.png)
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/168797/30/24833/58700/616b985bEb25c7864/40d606d2fed21371.png)](https://img30.360buyimg.com/pop/jfs/t1/168797/30/24833/58700/616b985bEb25c7864/40d606d2fed21371.png)
 # #
 ### **windows平台设置定时任务计划** ###
 ## 参考[Windows创建计划任务定时执行Python脚本](https://cloud.tencent.com/developer/news/295826)此篇文章 ###
