@@ -60,7 +60,7 @@
 # #
 ## 脚本兼容性解答 ##
 
-### linux，windows，android，路由器openwrt，nas等只要有Python3环境和终端即可运行。github action 理论能运行，腾讯云函数这种不能新建和读取文件的云函数平台暂不支持。 ###
+### linux，windows，android，路由器openwrt，nas等任何设备只要有Python3环境和终端即可运行。 ###
 # #
 ## 模块要求 ##
 ### python3基本不需要安装任何模块  直接尝试运行脚本,要是缺哪个模块就安哪个 ###
@@ -87,9 +87,10 @@
 
 ## docker 使用提示 ##
 ###  个人觉得docker是个**伪需求**，套娃python3 环境个人觉得没必要，这个项目又不是用js写的，对环境要求没那么高，若真想使用docker 直接构建一个python3的docker就行或者自己构建个alpine或者ubuntu的docker去装python3，下图为dockerhub的python3镜像，按描述构建后，然后docker exec -it docker的名字 /bin/bash  进入docker 然后安装git, 再git clone  此项目源码，其他的运行和定时任务就和linux实体机一样了 ### 
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/199060/30/13635/365840/616bf9d5Ef8061804/144729685f84dff9.png)](https://img30.360buyimg.com/pop/jfs/t1/199060/30/13635/365840/616bf9d5Ef8061804/144729685f84dff9.png)
 ### 很多人真是为了docker 而docker ，pull个镜像遇到网不好直接卡半天，**用docker 的一般都是nas 或者openwrt ，自己实体机装个python3很难吗？** ###
 # #
-### *至于腾讯云函数和github action,由于个人学业时间问题，很抱歉的宣告放弃支持，那么没有服务器，电脑，nas,openwrt路由器这些设备就没办法运行了python脚本了吗？注意是python 脚本，当然安卓手机也是能运行的啦，装个termux,termux装python3 就能运行脚本了，什么，你说上面所有的设备都没有，那建议就不要用了* ###
+### *至于腾讯云函数和github action,由于个人学业和时间问题，很抱歉的宣告放弃支持，那么没有服务器，电脑，nas,openwrt路由器这些设备就没办法运行了python脚本了吗？注意是python 脚本，当然安卓手机也是能运行的啦，装个termux,termux装python3 就能运行脚本了，什么，你说上面所有的设备都没有，那建议就不要用了* ###
 #  #
 
 
