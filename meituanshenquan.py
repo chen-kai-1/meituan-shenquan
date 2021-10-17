@@ -714,9 +714,9 @@ def exchange(token):
                 print("%s\n"%(result2["msg"]))
                 break
             elif (result2["code"]==1 and result2["subcode"]==-1):
-                print("%s,您现在的红包豆不足以兑换此类红包!\n正尝试兑换*次一等级*必中符"%(result2["msg"]))
+                print("%s,您现在的红包豆不足以兑换此类红包!\n正尝试兑换*次一等级*必中符\n"%(result2["msg"]))
                 if(propId==2):
-                    print("您现有的红包豆数量太少，无法兑换任何面值的必中符,下次运行时将再次为您尝试!")
+                    print("您现有的红包豆数量太少，无法兑换任何面值的必中符,下次运行时将再次为您尝试!\n")
                     break
                 if(propId ==3):
                     propId =2
@@ -725,7 +725,7 @@ def exchange(token):
                 if(propId ==5):
                     propId =4
             elif (result2["code"]==7):
-                print("参数异常或接口已失效")
+                print("参数异常或接口已失效\n")
             else:
                 print("请求接口失效或参数异常，请稍后再试!\n")
         except urllib.error.URLError as e:
@@ -923,7 +923,7 @@ def main():
                     if not istimeforbig1:
                         print("*👴尽力了，等到红包池要关闭了都未等到15元以上大额红包被抢完，开始保底15元，注意查收！*\n")
                         break
-                    if(thirty ==0 and fifty ==0):
+                    if(thirty ==1 and fifty ==1):
                         print("*15有剩余，30元已被抢完，50元已被抢完，跳出监测，正在为您抢保底15元红包!*\n")
                         break
                     queryredpool(token)
@@ -938,7 +938,7 @@ def main():
                     if not istimeforbig2 :
                         print("*👴尽力了，等到红包池要关闭了都未等到15元以上大额红包被抢完，开始保底15元，注意查收！*\n")
                         break
-                    if(thirty ==0 and fifty ==0):
+                    if(thirty ==1 and fifty ==1):
                         print("*15有剩余，30元已被抢完，50元已被抢完，跳出监测，正在为您抢保底15元红包!*\n")
                         break
                     queryredpool(token)
@@ -950,7 +950,7 @@ def main():
                     ##拥有10块以上的必中符，先等待着试图抢30,要是10和15都没了，就直接去抢30的红包，或许有可能抢到50
 
                 while  fifteen ==1 :
-                    if(thirty ==0 and fifty ==0 ):
+                    if(thirty ==1 and fifty ==1 ):
                         print("&15有剩余，30元已被抢完，50元已被抢完，跳出监测，正在为您抢保底15元红包！*\n")
                         break 
                     if(br ==1):
@@ -973,7 +973,7 @@ def main():
                     ##拥有10块以上的必中符，先等待着试图抢30,要是10和15都没了，就直接去抢30的红包，或许有可能抢到50
 
                 while  fifteen ==1 :
-                    if(thirty ==0 and fifty ==0 ):
+                    if(thirty ==1 and fifty ==1 ):
                         print("&15有剩余，30元已被抢完，50元已被抢完，跳出监测，正在为您抢保底15元红包！*\n")
                         break 
                     if(br ==1):

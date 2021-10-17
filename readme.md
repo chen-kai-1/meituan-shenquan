@@ -48,7 +48,6 @@
 ## 使用说明 ##
 ### 将脚本部署在服务器或者nas openwrt 或者潘多拉路由器 群晖等可读写文件的平台上,本脚本只在服务器上测试通过。若需在腾讯云函数平台请自行修改源码中参数，否则无法运行在腾讯云函数等无法读取文件的云函数平台 ###
 # #
-## 正努力构建腾讯云函数版本和docker版本 ##
 # #
 ### 首次执行脚本需按提示输入参数，后续即可自动读取脚本所在目录的配置文件 ###
 ## **即设置crontab等定时计划前一定要手动运行一遍脚本记录token等参数 ！！** ##
@@ -64,10 +63,7 @@
 ### linux，windows，android，路由器openwrt，nas等只要有Python3环境和终端即可运行。github action 理论能运行，腾讯云函数这种不能新建和读取文件的云函数平台暂不支持。 ###
 # #
 ## 模块要求 ##
-### 直接尝试运行脚本 若正常，则说明直接就能用 若报错 一般也就是ssl 模块未安装  直接命令行终端执行 ###
-# #
-  ## *pip install ssl -i https://pypi.tuna.tsinghua.edu.cn/simple/* ##
-
+### python3基本不需要安装任何模块  直接尝试运行脚本,要是缺哪个模块就安哪个 ###
 
 # #
 ## 定时计划设置 ##
@@ -88,6 +84,14 @@
 # #
 ### **windows平台设置定时任务计划** ###
 ## 参考[Windows创建计划任务定时执行Python脚本](https://cloud.tencent.com/developer/news/295826)此篇文章 ###
+
+## docker 使用提示 ##
+###  个人觉得docker是个**伪需求**，套娃python3 环境个人觉得没必要，这个项目又不是用js写的，对环境要求没那么高，若真想使用docker 直接构建一个python3的docker就行或者自己构建个alpine或者ubuntu的docker去装python3，下图为dockerhub的python3镜像，按描述构建后，然后docker exec -it docker的名字 /bin/bash  进入docker 然后安装git, 再git clone  此项目源码，其他的运行和定时任务就和linux实体机一样了 ### 
+### 很多人真是为了docker 而docker ，pull个镜像遇到网不好直接卡半天，**用docker 的一般都是nas 或者openwrt ，自己实体机装个python3很难吗？** ###
+# #
+### *至于腾讯云函数和github action,由于个人学业时间问题，很抱歉的宣告放弃支持，那么没有服务器，电脑，nas,openwrt路由器这些设备就没办法运行了python脚本了吗？注意是python 脚本，当然安卓手机也是能运行的啦，装个termux,termux装python3 就能运行脚本了，什么，你说上面所有的设备都没有，那建议就不要用了* ###
+#  #
+
 
 ## 注意事项 ##
 ### 定时计划时**不要使用输出重定向** 脚本自动生成的output.txt 起到记录推送的功能 每次内容会自动覆盖，所以**执行时不要使用任何输出重定向命令**!!!!!!!!!! ###
