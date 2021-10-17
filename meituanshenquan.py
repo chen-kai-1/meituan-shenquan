@@ -33,7 +33,7 @@ d_time6 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '23:5
 
 
 #d_time6定义几点前不使用必中符,注意是不使用！！！若时间定义为17:00点,也就是17:00点之前的抽奖不会使用必中符,优先级高于自定义的大额抢红包时间,以节约道具库中的有效的必中符
-##若d_time6定义为11:00点，则代表不对使用必中符时间进行限制，切记不能删除d_time6，若不需限制，只需将d_time6时间改为11:00,注意是英文的冒号
+##若d_time6定义为11:00点，则代表不对使用必中符时间进行限制，切记不能删除d_time7，若不需限制，只需将d_time7时间改为11:00,注意是英文的冒号
 global d_time7
 d_time7 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '11:00', '%Y-%m-%d%H:%M')
 
@@ -993,7 +993,7 @@ def main():
 
 
     
-    if n_time > d_time7  :
+    if n_time < d_time7  :
         propIdforuse =1      
     drawlottery(batchId,token,propIdforuse)
 
