@@ -16,7 +16,7 @@
 ## 新增[pushPlus](https://www.pushPlus.plus) 推送 ##
 ###  此推送每天限额200次 对比server酱每天5次的免费推送，推荐使用pushPlus ###
 # #
-### [pushPlus](https://www.pushPlus.plus) 与[server酱](https://sct.ftqq.com/)默认使用的推送接口已被微信放弃,停止服务时间待定，故请尽量采用到企业微信机器人推送 ###
+### [pushPlus](https://www.pushPlus.plus) 与[server酱](https://sct.ftqq.com/)默认使用的推送接口目前虽可继续使用，但已被微信宣告放弃,默认推送接口停止服务时间待定，故请尽量更改推送接口,采用企业微信机器人推送 ###
 ### [企业微信机器人webhook获取方式](https://juejin.cn/post/6844903887212642312) ###
 # #
 ### 建议pushPlus和server酱推送均使用企业微信机器人推送渠道，需下载企业微信，申请机器人记住webhook,pushPlus需**按照下图在脚本开头**填写webhook 地址，server酱webhook地址不用填在脚本里，只需在server 酱网页端选择推送渠道并填写即可 ###
