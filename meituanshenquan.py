@@ -911,8 +911,8 @@ def main():
     exchange(token)   
     querymyProps(token)
     #定义bool类型变量判断当前时间段是不是自定义的大额抢红包时间段
-    istimeforbig1= (n_time <d_time4) and(n_time>d_time3)
-    istimeforbig2= (n_time <d_time6) and(n_time>d_time4)
+    istimeforbig1= (n_time <=d_time4) and(n_time>=d_time3)
+    istimeforbig2= (n_time <=d_time6) and(n_time>=d_time4)
     if n_time > d_time7:
         if istimeforbig1:
             if propIdforuse ==5:
