@@ -18,15 +18,24 @@ d_time0 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '11:0
 n_time = datetime.datetime.now()
 
 
-#定义抢大额红包时间段d_time4和d_time5之间
-global d_time4,d_time5
-d_time4 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '17:00', '%Y-%m-%d%H:%M')
-d_time5 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '23:59', '%Y-%m-%d%H:%M')
+#定义抢大额红包时间段d_time3和d_time4和d_time5和d_time6之间 ，d_time4提前11分钟意在防止下午红包池提前10分钟关闭和脚本抢大额红包有些地区到最后一刻10元以上红包都有剩余导致脚本报错，
+# 若到最后一刻会自动放弃监测，抢所拥有的必中符的面值保底
+###默认 抢大额(15元以上) 时间段为下午17:00点到16:49分和晚上21:00到23点59分   不建议进行更改
+##以下默认中午试图抢大额红包 前提是道具库存中有10元以上必中符！！！！！！！！！
+
+global d_time3,d_time4,d_time5,d_time6
+
+d_time3 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '17:00', '%Y-%m-%d%H:%M')
+d_time4 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '20:49', '%Y-%m-%d%H:%M')
+
+d_time5 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '21:00', '%Y-%m-%d%H:%M')
+d_time6 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '23:59', '%Y-%m-%d%H:%M')
 
 
-#定义几点后不使用必中符,注意是不使用！！！如下面的17点,也就是17点之后的抽奖不会使用必中符,以节约道具库中的有效的必中符
-global d_time6
-d_time6 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '17:00', '%Y-%m-%d%H:%M')
+#d_time6定义几点前不使用必中符,注意是不使用！！！若时间定义为17:00点,也就是17:00点之前的抽奖不会使用必中符,优先级高于自定义的大额抢红包时间,以节约道具库中的有效的必中符
+##若d_time6定义为11:00点，则代表不对使用必中符时间进行限制，切记不能删除d_time7，若不需限制，只需将d_time7时间改为11:00,注意是英文的冒号
+global d_time7
+d_time7 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '11:00', '%Y-%m-%d%H:%M')
 
 
  #关闭ssl校验，用于抓包调试请求
@@ -68,12 +77,12 @@ cwd = os.path.dirname(os.path.realpath(__file__))
 eight = ten = fifteen = thirty =fifty=1
 ##############################################################################
 # eight_left= 10
-# thirty_left=1
-# fifty_left=1
 ################################################################################
 #若在您自定义的抢大额红包时间段中，您无法通过10元以上必中符抢到任何红包！！，则请将下面两行数值改大些，如改成10左右的数字
 ten_left=0
 fifteen_left=0
+thirty_left=0
+fifty_left=0
 
 
 #将print内容同步写到output.txt文件
@@ -705,9 +714,9 @@ def exchange(token):
                 print("%s\n"%(result2["msg"]))
                 break
             elif (result2["code"]==1 and result2["subcode"]==-1):
-                print("%s,您现在的红包豆不足以兑换此类红包!\n正尝试兑换*次一等级*必中符"%(result2["msg"]))
+                print("%s,您现在的红包豆不足以兑换此类红包!\n正尝试兑换*次一等级*必中符\n"%(result2["msg"]))
                 if(propId==2):
-                    print("您现有的红包豆数量太少，无法兑换任何面值的必中符,下次运行时将再次为您尝试!")
+                    print("您现有的红包豆数量太少，无法兑换任何面值的必中符,下次运行时将再次为您尝试!\n")
                     break
                 if(propId ==3):
                     propId =2
@@ -716,7 +725,7 @@ def exchange(token):
                 if(propId ==5):
                     propId =4
             elif (result2["code"]==7):
-                print("参数异常或接口已失效")
+                print("参数异常或接口已失效\n")
             else:
                 print("请求接口失效或参数异常，请稍后再试!\n")
         except urllib.error.URLError as e:
@@ -786,12 +795,11 @@ def queryredpool(token):
                     ten = 0
                 if (round(float(k["showPriceNumberYuan"]))==15 and k["leftStock"]==fifteen_left):
                     fifteen = 0
-                # if (round(float(k["showPriceNumberYuan"]))==30 and k["leftStock"]==thirty_left):
-                #     thirty = 0
-                # if (round(float(k["showPriceNumberYuan"]))==50 and k["leftStock"]==fifty_left):
-                #     fifty = 0
-                if k["showPriceNumberYuan"]=="50" or k["showPriceNumberYuan"]=="30" or k["showPriceNumberYuan"]=="15":
-                    print("*红包池中%s元总量:%d张,已被领取:%d张,剩余%d张*\n"%(k["showPriceNumberYuan"],k["totalStock"],k["sendStock"],k["leftStock"]))
+                if (round(float(k["showPriceNumberYuan"]))==30 and k["leftStock"]==thirty_left):
+                    thirty = 0
+                if (round(float(k["showPriceNumberYuan"]))==50 and k["leftStock"]==fifty_left):
+                    fifty = 0
+                print("*红包池中%s元总量:%d张,已被领取:%d张,剩余%d张*\n"%(k["showPriceNumberYuan"],k["totalStock"],k["sendStock"],k["leftStock"]))
                 
         elif (result2["code"]==1 and result2["subcode"]==-1):
             print("token失效,导致获取活动信息失败！%s\n"%(result2["msg"]))
@@ -903,31 +911,89 @@ def main():
     exchange(token)   
     querymyProps(token)
     #定义bool类型变量判断当前时间段是不是自定义的大额抢红包时间段
-    istimeforbig= (n_time <d_time5) and(n_time>d_time4)
-    if(istimeforbig ):
-        if propIdforuse ==5:
-            print("**当前符合抢30元以上大额红包的条件**")
-            print("**正使用15元必中符为您尝试抢30元以上的红包**")
-                ##拥有15块以上的必中符，先等待着试图抢30,要是15没了，就直接去抢30的红包，或许有可能抢到50
-            while  fifteen ==1 :
-                if(thirty ==0 and fifty ==0):
-                    break
-                queryredpool(token)
-
-        if propIdforuse ==3:
-            print("**当前符合抢30元以上大额红包的条件**")
-            print("**正使用15元必中符为您尝试抢30元以上的红包**")
-                ##拥有10块以上的必中符，先等待着试图抢30,要是10和15都没了，就直接去抢30的红包，或许有可能抢到50
-
-            while  fifteen ==1 :
-                if(thirty ==0 and fifty ==0):
-                    break
-                if ten ==0 :
+    istimeforbig1= (n_time <=d_time4) and(n_time>=d_time3)
+    istimeforbig2= (n_time <=d_time6) and(n_time>=d_time4)
+    if n_time > d_time7:
+        if istimeforbig1:
+            if propIdforuse ==5:
+                print("**当前符合抢30元以上大额红包的条件**\n")
+                print("**正使用15元必中符为您尝试抢30元以上的红包**\n")
+                    ##拥有15块以上的必中符，先等待着试图抢30,要是15没了，就直接去抢30的红包，或许有可能抢到50
+                while  fifteen ==1 :
+                    if not istimeforbig1:
+                        print("*👴尽力了，等到红包池要关闭了都未等到15元以上大额红包被抢完，开始保底15元，注意查收！*\n")
+                        break
+                    if(thirty ==1 and fifty ==1):
+                        print("*15有剩余，30元已被抢完，50元已被抢完，跳出监测，正在为您抢保底15元红包!*\n")
+                        break
                     queryredpool(token)
-                while ten ==1:
-                    queryredpool(token)              
+
+
+        if istimeforbig2 :
+            if propIdforuse ==5:
+                print("**当前符合抢30元以上大额红包的条件**\n")
+                print("**正使用15元必中符为您尝试抢30元以上的红包**\n")
+                    ##拥有15块以上的必中符，先等待着试图抢30,要是15没了，就直接去抢30的红包，或许有可能抢到50
+                while  fifteen ==1 :
+                    if not istimeforbig2 :
+                        print("*👴尽力了，等到红包池要关闭了都未等到15元以上大额红包被抢完，开始保底15元，注意查收！*\n")
+                        break
+                    if(thirty ==1 and fifty ==1):
+                        print("*15有剩余，30元已被抢完，50元已被抢完，跳出监测，正在为您抢保底15元红包!*\n")
+                        break
+                    queryredpool(token)
+
+        if istimeforbig1:    
+            if propIdforuse ==3:
+                print("**当前符合抢30元以上大额红包的条件**\n")
+                print("**正使用10元必中符为您尝试抢30元以上的红包**\n")
+                    ##拥有10块以上的必中符，先等待着试图抢30,要是10和15都没了，就直接去抢30的红包，或许有可能抢到50
+
+                while  fifteen ==1 :
+                    if(thirty ==1 and fifty ==1 ):
+                        print("&15有剩余，30元已被抢完，50元已被抢完，跳出监测，正在为您抢保底15元红包！*\n")
+                        break 
+                    if(br ==1):
+                        break
+                    if not istimeforbig1:
+                            print("*👴尽力了，等到红包池要关闭了都未等到15元以上大额红包被抢完，开始保底15元，注意查收！*\n")
+                            break
+                    if ten ==0 :
+                        queryredpool(token)
+                    while ten ==1:
+                        if not istimeforbig1:
+                            br = 1
+                            print("*👴尽力了，等到红包池要关闭了都未等到任意大额红包被抢完，开始保底10元，注意查收！*\n")
+                        queryredpool(token)  
+        
+        if istimeforbig2:    
+            if propIdforuse ==3:
+                print("**当前符合抢30元以上大额红包的条件**\n")
+                print("**正使用10元必中符为您尝试抢30元以上的红包**\n")
+                    ##拥有10块以上的必中符，先等待着试图抢30,要是10和15都没了，就直接去抢30的红包，或许有可能抢到50
+
+                while  fifteen ==1 :
+                    if(thirty ==1 and fifty ==1 ):
+                        print("&15有剩余，30元已被抢完，50元已被抢完，跳出监测，正在为您抢保底15元红包！*\n")
+                        break 
+                    if(br ==1):
+                        break
+                    if not istimeforbig2:
+                            print("*👴尽力了，等到红包池要关闭了都未等到15元以上大额红包被抢完，开始保底15元，注意查收！*\n")
+                            break
+                    if ten ==0 :
+                        queryredpool(token)
+                    while ten ==1:
+                        if not istimeforbig2:
+                            br = 1
+                            print("*👴尽力了，等到红包池要关闭了都未等到任意大额红包被抢完，开始保底10元，注意查收！*\n")
+                        queryredpool(token)  
+
+
+
+
     
-    if n_time > d_time6  :
+    if n_time < d_time7  :
         propIdforuse =1      
     drawlottery(batchId,token,propIdforuse)
 
