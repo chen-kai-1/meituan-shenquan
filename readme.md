@@ -90,7 +90,8 @@
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/199060/30/13635/365840/616bf9d5Ef8061804/144729685f84dff9.png)](https://img30.360buyimg.com/pop/jfs/t1/199060/30/13635/365840/616bf9d5Ef8061804/144729685f84dff9.png)
 ### 很多人真是为了docker 而docker ，pull个镜像遇到网不好直接卡半天，**用docker 的一般都是nas 或者openwrt ，自己实体机装个python3很难吗？** ###
 # #
-### *至于腾讯云函数和github action,由于个人学业和时间问题，很抱歉的宣告放弃支持，那么没有服务器，电脑，nas,openwrt路由器这些设备就没办法运行了python脚本了吗？注意是python 脚本，当然安卓手机也是能运行的啦，装个termux,termux装python3 就能运行脚本了，什么，你说上面所有的设备都没有，那建议就不要用了* ###
+## 新合并分支支持githubAction 注意区分版本 一个为终端版 一个为githubAction版 ## 
+##githubAction版暂未**修改完整**，直接运行无法运行，请自行修改或等后续更新 githubAction版本请自行修改配置文件的定时任务时间！ ##
 #  #
 
 
