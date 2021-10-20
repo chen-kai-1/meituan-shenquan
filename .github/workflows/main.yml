@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2.2.2
+        with:
+          python-version: 3.7
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip
+
+      - name: Run
+        run: python meituanshenquan.py
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+          PUSHKEY: ${{ secrets.PUSHKEY }}
