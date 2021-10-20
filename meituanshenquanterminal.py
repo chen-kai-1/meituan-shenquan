@@ -60,12 +60,11 @@ webhook = ""
 #定义全局变量并初始化 以下初始化赋值的变量不要改！！！！
 global propIdforuse
 showPriceNumber = "1"
-# 上海 121.473658,31.230378
-wm_latitude =121
-wm_longitude=31
+wm_latitude =1.0
+wm_longitude=1.0
 token =""
 propId=1
-exchangeCoinNumber=1800
+exchangeCoinNumber=1.0
 serverkey=""
 pushPlusToken = ""
 yesornot = ""
@@ -198,12 +197,11 @@ def getlatlongitude():
         return -1
     else:
         while True:
+            
             try:
                 print("若您不知道🙏限时抢红包开放城市，可试各地省会,如成都(30657401,104065827)\n")
-                # wm_latitude=eval(input("请输入去除小数点的纬度(如30657401):\n"))
-                # wm_longitude=eval(input("请输入去除小数点的经度(如104065827):\n"))
-                wm_latitude=121
-                wm_longitude=31
+                wm_latitude=eval(input("请输入去除小数点的纬度(如30657401):\n"))
+                wm_longitude=eval(input("请输入去除小数点的经度(如104065827):\n"))
             except:
                 pass
             if type(wm_latitude)==int and type(wm_longitude)==int :
@@ -214,8 +212,8 @@ def getlatlongitude():
 
 #定义一个云端查询必中符库中所有的propId 和needNumber 的函数，并传给getpropId_Coninnumber()函数作为用户输入参考提示
 def myredbean(token):
-    wm_latitude = 121
-    wm_longitude = 31
+    wm_latitude = 1
+    wm_longitude = 1
     print("开始执行从美团接口查询proid 和 needNumber参数脚本:\n")
     datas = "parActivityId="+parActivityId+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+str(token)+"&userPortraitId="+str(portraitId)
     url_drawlottery = baseurl+r"/cfeplay/playcenter/batchgrabred/myRedBean"
@@ -250,10 +248,8 @@ def getpropId_Coinnumber(token):
         while True:
             myredbean(token)
             try:
-                propId=5
-                exchangeCoinNumber=1800
-                # propId=eval(input("请输入所需要兑换道具的propId(推荐填写5):\n"))
-                # exchangeCoinNumber=eval(input("请输入propId对应某类必中符所需的豆子数量(推荐填写1800):\n"))
+                propId=eval(input("请输入所需要兑换道具的propId(推荐填写5):\n"))
+                exchangeCoinNumber=eval(input("请输入propId对应某类必中符所需的豆子数量(推荐填写1800):\n"))
             except:
                 pass
             if type(propId)==int and type(exchangeCoinNumber)==int  :
@@ -266,46 +262,47 @@ def getpropId_Coinnumber(token):
 
 #定义从文本文件中获取存入变量的函数,第二次运行时不用输入，若需改变经纬度和token，则直接删除文件即可
 def getVar():
-    # if not os.path.exists(str(cwd)+r"/wm_latitudewm_longitude.txt"):
-    #     print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-    #     os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
-    #     os.remove(str(cwd)+r"/token.txt")
-    #     os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
-    #     os.remove(str(cwd)+r"/serverkey.txt")
-    #     os.remove(str(cwd)+r"/pushPlusToken.txt")
-    #     sys.exit(0)
-    # file1 = open(str(cwd)+r"/wm_latitudewm_longitude.txt", mode='r',encoding="UTF-8")
-    # wm_latitude  = int(file1.readline())
-    # wm_longitude = int(file1.readline())  
-    # file1.close()
+    if not os.path.exists(str(cwd)+r"/wm_latitudewm_longitude.txt"):
+        print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
+        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        os.remove(str(cwd)+r"/token.txt")
+        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        os.remove(str(cwd)+r"/serverkey.txt")
+        os.remove(str(cwd)+r"/pushPlusToken.txt")
+        sys.exit(0)
+    file1 = open(str(cwd)+r"/wm_latitudewm_longitude.txt", mode='r',encoding="UTF-8")
+    wm_latitude  = int(file1.readline())
+    wm_longitude = int(file1.readline())  
+    file1.close()
 
-    # file2 = open(str(cwd)+r"/token.txt", mode='r',encoding="UTF-8")
-    # if not os.path.exists(str(cwd)+r"/token.txt"):
-    #     print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-    #     os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
-    #     os.remove(str(cwd)+r"/token.txt")
-    #     os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
-    #     os.remove(str(cwd)+r"/serverkey.txt")
-    #     os.remove(str(cwd)+r"/pushPlusToken.txt")
-    #     sys.exit(0)
-    # token  = file2.readline()
-    # file2.close()
+    file2 = open(str(cwd)+r"/token.txt", mode='r',encoding="UTF-8")
+    if not os.path.exists(str(cwd)+r"/token.txt"):
+        print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
+        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        os.remove(str(cwd)+r"/token.txt")
+        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        os.remove(str(cwd)+r"/serverkey.txt")
+        os.remove(str(cwd)+r"/pushPlusToken.txt")
+        sys.exit(0)
+    token  = file2.readline()
+    file2.close()
 
-    # if not os.path.exists(str(cwd)+r"/propId_Coinnumbe.txt"):
-    #     print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-    #     os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
-    #     os.remove(str(cwd)+r"/token.txt")
-    #     os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
-    #     os.remove(str(cwd)+r"/serverkey.txt")
-    #     os.remove(str(cwd)+r"/pushPlusToken.txt")
-    #     sys.exit(0)
-    # file3 = open(str(cwd)+r"/propId_Coinnumbe.txt", mode='r',encoding="UTF-8")
-    # propId  = int(file3.readline())
-    # exchangeCoinNumber = int(file3.readline())  
-    # file3.close()
+    if not os.path.exists(str(cwd)+r"/propId_Coinnumbe.txt"):
+        print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
+        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        os.remove(str(cwd)+r"/token.txt")
+        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        os.remove(str(cwd)+r"/serverkey.txt")
+        os.remove(str(cwd)+r"/pushPlusToken.txt")
+        sys.exit(0)
+    file3 = open(str(cwd)+r"/propId_Coinnumbe.txt", mode='r',encoding="UTF-8")
+    propId  = int(file3.readline())
+    exchangeCoinNumber = int(file3.readline())  
+    file3.close()
     
 
     return wm_latitude,wm_longitude,token,propId,exchangeCoinNumber
+
 
 ##获得pushPlusToken
 def pushPlusTokenvar():
@@ -898,24 +895,15 @@ def main():
     global propIdforuse
     temp = sys.stdout
     print("本脚本提供pushPlus、serverkey这两种推送方式,可以二选一或者全选，首次运行脚本请依次选择是否开启对应推送!\n由于server酱每日免费限额5条,若需开启推送,请首选pushPlus!\n")
-
-    if os.environ.get('PUSHKEY'):
-        serverkey=os.environ['PUSHKEY']
-    else:
-        getpushPlusToken()
-        getserverkey()
-
-    if os.environ.get('PUSHKEY'):
-        token=os.environ['TOKEN']
-    else:
-        token = gettoken()
-
+    getpushPlusToken()
+    getserverkey()
+    token = gettoken()
     getlatlongitude()
     getpropId_Coinnumber(token)
     sys.stdout = Logger(str(cwd)+r'/output.txt')
-    # token = getVar()[2]
+    token = getVar()[2]
     signForBeans(token)
-
+    #
     queryredpool(token)
     batchId = getbatchId(token)
     ##先去保持每天签到 以获得必中符或者豆子
