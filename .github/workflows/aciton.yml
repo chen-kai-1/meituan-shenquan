@@ -26,7 +26,7 @@ jobs:
           pushPlusToken: ${{ secrets.PUSHPLUSTOKEN }} #必填项目,请自行在fork的项目上设置 秘密环境变量，变量含义：pushPlus推送所用token
           yesornot: "y" #必填项目,双引号内填写n则代表不开启server酱推送,填写n则开启推送
           yesornot2: "y" #必填项目,双引号内填写n则代表不开启pushPlus推送,填写n则开启推送
-          webhook: " "       #选填项目,变量含义：用于pushPlus 企业微信推等其他推送渠道所用，默认推送渠道无需设置注释即可
+          webhook: ""       #选填项目,变量含义：用于pushPlus 企业微信推等其他推送渠道所用，默认推送渠道无需设置注释即可
           #若需启用企业微信推送，请自行在fork的项目上设置 秘密环境变量webhook，并将上一行双引号覆盖成${{ secrets.webhook }} 并取消上一行注释，取消注释后注意空格缩进对齐
           token: ${{ secrets.MTTOKEN }}   #必填项目,请自行在fork的项目上设置 秘密环境变量，变量含义：美团token
           on: 1  #必填项目,此配置为默认开启在有十元必中符的情况下自动抢15以上红包，若需关闭，请将1改为0，注意勿破坏空格缩进
@@ -39,7 +39,7 @@ jobs:
           propId: "5" #必填项目,此处双引号填写红包豆自动兑换的道具类型,5对应15元必中符，建议填写5即可
           exchangeCoinNumber: "1800" #必填项目,此处双引号填写兑换上一行必中符所需红包豆,建议填写1800即可
         run: |
-          python mt-action-scripts.py ${{webhook}} ${{wm_latitude}} ${{wm_longitude}} ${{token}} ${{propId}} ${{exchangeCoinNumber}} ${{serverkey}} ${{pushPlusToken}} ${{yesornot}} ${{yesornot2}} ${{}} ${{on}}
+          python mt-action-scripts.py webhook wm_latitude wm_longitude token propId exchangeCoinNumber serverkey pushPlusToken yesornot yesornot2 on
 
  
     
