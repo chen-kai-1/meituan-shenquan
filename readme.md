@@ -17,7 +17,7 @@
 ### 七.自动查询红包池红包🧧详情  ###
 # #
 # 新增 github action 云端执行脚本 #
-# #
+# 注意：经测试，由于action使用的虚拟机为国外ip,在脚本正常运行三四次后token会被美团封禁，导致脚本报错，故不建议使用action!! #
 ### 注意区分版本：带*terminal* 字样的版本为原服务器版本 带*action* 的版本为*github action*调用的版本  ###
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/173679/32/24244/547697/61716742Edd6cdba7/ded0fd6b1d6f72ec.png)](https://img30.360buyimg.com/pop/jfs/t1/173679/32/24244/547697/61716742Edd6cdba7/ded0fd6b1d6f72ec.png)
 # #
@@ -35,8 +35,8 @@
 
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/207445/26/6171/461209/617154feEa801bcee/9d9fa5fbc72d6812.png)](https://img30.360buyimg.com/pop/jfs/t1/207445/26/6171/461209/617154feEa801bcee/9d9fa5fbc72d6812.png)
 # #
-### 四、action.yml配置文件 选择性自定义修改(非必需)
-### 回到fork的仓库首页，点击查看./github/workflows/action.yml文件，按照文件注释进行需要的修改，如选择性关闭某个推送或自定义用于企业微信等非默认推送渠道的webhook或者修改定时运行时间。配置文件默认为同时开启pushPlus和server酱推送。配置文件如下图 ###
+### 四、action.yml配置文件 选择性自定义修改(必需)
+### 回到fork的仓库首页，点击查看./github/workflows/action.yml文件，按照文件注释进行需要的修改，如选择性关闭某个推送或自定义用于企业微信等非默认推送渠道的webhook或者修改定时运行时间。**本仓库默认配置关闭定时schedule 定时任务，请手动取消注释，并自定义时间段**配置文件默认为同时开启pushPlus和server酱推送。配置文件如下图 ###
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/200666/27/12819/411251/61715779Ed1e730f2/e20ca83597e490af.png)](https://img30.360buyimg.com/pop/jfs/t1/200666/27/12819/411251/61715779Ed1e730f2/e20ca83597e490af.png)
 ##  五、测试action ##
 ### 本action 除了在指定的时间段运行外，可手动点击自己fork的仓库的主页的右上角的**star按钮**运行本脚本,点击一次star后刷新仓库首页，进入action页面，会发现已经触发了一次action脚本,以便用于测试。点击star运行功能只限fork的仓库所有者，其他非所有者无法点击，还请放心！ ###

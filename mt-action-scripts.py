@@ -58,8 +58,10 @@ global webhook
 webhook = sys.argv[1]
 
 #定义全局变量并初始化 以下初始化赋值的变量不要改！！！！
-global propIdforuse
+global propIdforuse,token,batchId
 showPriceNumber = "1"
+propIdforuse =2
+batchId = "haha"
 wm_latitude =sys.argv[2]
 wm_longitude=sys.argv[3]
 token =sys.argv[4]
@@ -69,7 +71,6 @@ serverkey=sys.argv[7]
 pushPlusToken =sys.argv[8]
 yesornot = sys.argv[9]
 yesornot2 = sys.argv[10]
-propIdforuse =2
 cwd = os.path.dirname(os.path.realpath(__file__))
 
 ##############################################################################
@@ -339,7 +340,7 @@ def myredbean(token):
 
     
 #定义获取batchId的函数
-def getbatchId(token):
+def getbatchId():
     global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
@@ -383,7 +384,7 @@ def getbatchId(token):
 
 
 #定义每天七次签到领豆的函数，需传入获取的token
-def signForBeans(token):
+def signForBeans():
     print("**开始执行签到领豆脚本:** \n")
     datas = "token="+token
     url_signforbeans = baseurl+r"/cfeplay/playcenter/batchgrabred/drawPoints/v2"
@@ -413,12 +414,14 @@ def signForBeans(token):
 
 
 #def 限时抢红包函数
-def drawlottery(batchId,token,propIdforuse):
+def drawlottery(batchId):
     global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行限时抢天天神券脚本🧧:**\n")
-    datas = "parActivityId="+parActivityId+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+token+"&batchId="+batchId+"&isShareLink=true"+"&propType=1"+"&propId="+str(propIdforuse)
+
+    print(batchId)
+    datas = "parActivityId="+parActivityId+"&wm_latitude="+wm_latitude+"&wm_longitude="+wm_longitude+"&token="+token+"&batchId="+batchId+"&isShareLink=true"+"&propType=1"+"&propId="+str(propIdforuse)
     url_drawlottery = baseurl+r"/cfeplay/playcenter/batchgrabred/drawlottery"
     request =urllib.request.Request(url_drawlottery,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
@@ -452,7 +455,7 @@ def drawlottery(batchId,token,propIdforuse):
 
 
 #定义接受红包函数，获得红包小于5元时，不执行此函数，并调用redtobean函数自动将红包转为红包豆，若两个函数都不执行，在抢红包成功5分钟左右红包会自动发放到账户
-def acceptRed(batchId,token):
+def acceptRed(batchId):
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     global wm_latitude,wm_longitude
@@ -483,7 +486,7 @@ def acceptRed(batchId,token):
             print(e,"reason")
 
 #定义红包转红包豆函数，将小于5元的红包转为红包豆
-def redtobean(batchId,token):
+def redtobean(batchId):
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     global wm_latitude,wm_longitude
@@ -518,7 +521,7 @@ def redtobean(batchId,token):
 
 
 #查询已领取到的天天神券
-def querymyreward(token):
+def querymyreward():
     print("**开始执行查询已领天天神券🧧脚本:**\n")
     datas = "parActivityId="+parActivityId+"&token="+token
     url_querymyreward = baseurl+r"/cfeplay/playcenter/batchgrabred/myreward"
@@ -570,7 +573,7 @@ def querymyreward(token):
 
 
 #获取每日浏览天天神券奖励的30豆
-def sendTaskRedBean(token):
+def sendTaskRedBean():
     global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
@@ -599,7 +602,7 @@ def sendTaskRedBean(token):
 
 
 #定义每日签到得必中符函数
-def doAction(token):
+def doAction():
     global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
@@ -628,7 +631,7 @@ def doAction(token):
 
 
 #查看道具库中的必中符记录
-def querymyProps(token):
+def querymyProps():
     global propIdforuse
     global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
@@ -695,7 +698,7 @@ def querymyProps(token):
 
 
 #定义豆子兑换成必中符函数:
-def exchange(token):
+def exchange():
     global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
@@ -778,7 +781,7 @@ def myRedBeanRecords(token):
 
 
 #定义查询红包池函数 
-def queryredpool(token):
+def queryredpool():
     global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
@@ -811,7 +814,7 @@ def queryredpool(token):
         elif (result2["code"]==1 and result2["subcode"]==-1):
             print("token失效,导致获取活动信息失败！%s\n"%(result2["msg"]))
         else:
-            print("请求接口失效或参数异常，建议🙏重置参数!\n")
+            print("红包池未开放，等待中!\n")
     except urllib.error.URLError as e:
         if hasattr(e,"code"):
             print("脚本执行失败👀，错误代码如下:\n")
@@ -900,7 +903,7 @@ def serverjiang():
             print(e,"reason") 
 
 def main():
-    global propIdforuse
+    global propIdforuse,token
     temp = sys.stdout
     print("本脚本提供pushPlus、serverkey这两种推送方式,可以二选一或者全选，首次运行脚本请依次选择是否开启对应推送!\n由于server酱每日免费限额5条,若需开启推送,请首选pushPlus!\n")
     # getpushPlusToken()
@@ -909,18 +912,16 @@ def main():
     # getlatlongitude()
     # getpropId_Coinnumber(token)
     sys.stdout = Logger(str(cwd)+r'/output.txt')
-    # token = getVar()[2]
-    signForBeans(token)
-    #
-    queryredpool(token)
-    batchId = getbatchId(token)
+
+    batchId = getbatchId()
     ##先去保持每天签到 以获得必中符或者豆子
-    doAction(token)
-    exchange(token)   
-    querymyProps(token)
+    doAction()
+    exchange()   
+    querymyProps()
+
     #定义bool类型变量判断当前时间段是不是自定义的大额抢红包时间段
     istimeforbig1= (n_time <=d_time4) and(n_time>=d_time3)
-    istimeforbig2= (n_time <=d_time6) and(n_time>=d_time4)
+    istimeforbig2= (n_time <=d_time6) and(n_time>=d_time5)
     if n_time > d_time7:
         if istimeforbig1:
             if propIdforuse ==5:
@@ -934,7 +935,7 @@ def main():
                     if(thirty ==1 and fifty ==1):
                         print("*15有剩余，30元已被抢完，50元已被抢完，跳出监测，正在为您抢保底15元红包!*\n")
                         break
-                    queryredpool(token)
+                    queryredpool()
 
 
         if istimeforbig2 :
@@ -949,7 +950,7 @@ def main():
                     if(thirty ==1 and fifty ==1):
                         print("*15有剩余，30元已被抢完，50元已被抢完，跳出监测，正在为您抢保底15元红包!*\n")
                         break
-                    queryredpool(token)
+                    queryredpool()
 
         if istimeforbig1:    
             if propIdforuse ==3:
@@ -972,7 +973,7 @@ def main():
                         if not istimeforbig1:
                             br = 1
                             print("*👴尽力了，等到红包池要关闭了都未等到任意大额红包被抢完，开始保底10元，注意查收！*\n")
-                        queryredpool(token)  
+                        queryredpool()  
         
         if istimeforbig2:    
             if propIdforuse ==3:
@@ -995,24 +996,25 @@ def main():
                         if not istimeforbig2:
                             br = 1
                             print("*👴尽力了，等到红包池要关闭了都未等到任意大额红包被抢完，开始保底10元，注意查收！*\n")
-                        queryredpool(token)  
+                        queryredpool()  
 
 
 
 
-    
+ 
     if n_time < d_time7  :
-        propIdforuse =1      
-    drawlottery(batchId,token,propIdforuse)
+        propIdforuse =1 
+    
+    drawlottery(batchId)
 
     if(int(showPriceNumber)<500):
-        redtobean(batchId,token)
+        redtobean(batchId)
     else:
-        acceptRed(batchId,token)
-    querymyreward(token)
-    sendTaskRedBean(token)
-    querymyProps(token)
-    myRedBeanRecords(token)
+        acceptRed(batchId)
+    querymyreward()
+    sendTaskRedBean()
+    querymyProps()
+    myRedBeanRecords()
     sys.stdout = temp
     if(yesornot2 == "y"):
         pushPlus()

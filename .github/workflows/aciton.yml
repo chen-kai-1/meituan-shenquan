@@ -1,13 +1,10 @@
 #修改时注意不要破坏空格缩进,yaml不支持Tab键缩进，请使用同等长度空格缩进
 name: mtshenquan-aciton
 on:
-  push:
-    branches:
-      - main
   watch:
     types: started
-  schedule:
-    - cron: '*/2 * * * *' #github action 采取排队运行机制，可能导致您的定时计划延后，建议自行根据实际运行情况选择调整或推荐使用终端脚本
+  # schedule:
+    # - cron: '*/2 * * * *' #github action 采取排队运行机制，可能导致您的定时计划延后，建议自行根据实际运行情况选择调整或推荐使用终端脚本
 jobs:
   mt-action:
     name: my mt-action job

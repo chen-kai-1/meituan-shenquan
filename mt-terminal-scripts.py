@@ -367,6 +367,7 @@ def getbatchId(token):
             os.remove(str(cwd)+r"/token.txt")
             os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
             os.remove(str(cwd)+r"/serverkey.txt")
+            os.remove(str(cwd)+r"/pushPlusToken.txt")
             sys.exit(0)
         else:
             print("获取batchId错误👀，请检查网络，否则为接口失效！\n")
@@ -802,7 +803,7 @@ def queryredpool(token):
         elif (result2["code"]==1 and result2["subcode"]==-1):
             print("token失效,导致获取活动信息失败！%s\n"%(result2["msg"]))
         else:
-            print("请求接口失效或参数异常，建议🙏重置参数!\n")
+            print("红包池未开放，等待中!\n")
     except urllib.error.URLError as e:
         if hasattr(e,"code"):
             print("脚本执行失败👀，错误代码如下:\n")
