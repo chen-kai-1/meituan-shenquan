@@ -55,26 +55,26 @@ head={"Host": "i.waimai.meituan.com","User-Agent":"MeituanGroup/11.9.208","x-req
 baseurl=r"https://i.waimai.meituan.com"
 #定义 pushPlus 的webhook地址，用于企业微信等渠道的推送，默认为空，若采用企业微信，请手动填写
 global webhook
-# webhook = ${webhook}
+webhook = ${{webhook}}
 
 #定义全局变量并初始化 以下初始化赋值的变量不要改！！！！
 global propIdforuse
 showPriceNumber = "1"
-# wm_latitude =""
-# wm_longitude=""
-# token =${token}
-# propId=1
-# exchangeCoinNumber=1.0
-# serverkey=${serverkey}
-# pushPlusToken =${pushPlusToken}
-# yesornot = ${yesornot}
-# yesornot2 = ${yesornot2}
+wm_latitude =${{wm_latitude}}
+wm_longitude=${{wm_longitude}}
+token =${{token}}
+propId=${{propId}}
+exchangeCoinNumber=1.0
+serverkey=${{serverkey}}
+pushPlusToken =${{pushPlusToken}}
+yesornot = ${{yesornot}}
+yesornot2 = ${{yesornot2}}
 propIdforuse =2
 cwd = os.path.dirname(os.path.realpath(__file__))
 
 ##############################################################################
 ##标记这四类红包数量不为空，用来在有10元以上必中符时循环判断红包池余量抢购大额元红包，若您不需该功能，请自行将下一行的1改为0
-eight = ten = fifteen = thirty =fifty=on
+eight = ten = fifteen = thirty =fifty=${{on}}
 ##############################################################################
 # eight_left= 10
 ################################################################################
