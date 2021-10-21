@@ -414,6 +414,7 @@ def signForBeans(token):
 
 #def 限时抢红包函数
 def drawlottery(batchId,token,propIdforuse):
+    global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行限时抢天天神券脚本🧧:**\n")
@@ -454,6 +455,7 @@ def drawlottery(batchId,token,propIdforuse):
 def acceptRed(batchId,token):
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
+    global wm_latitude,wm_longitude
     print("**开始执行发放天天神券🧧到红包库脚本:**\n")
     datas = "parActivityId="+parActivityId+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+token+"&batchId="+batchId
     url_acceptRed = baseurl+r"/cfeplay/playcenter/batchgrabred/acceptRed"
@@ -484,6 +486,7 @@ def acceptRed(batchId,token):
 def redtobean(batchId,token):
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
+    global wm_latitude,wm_longitude
     print("**默认尝试执行面值小于5元🧧自动转红包豆脚本:**\n")
     datas = "parActivityId="+parActivityId+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+token+"&batchId="+batchId
     url_drawlottery = baseurl+r"/cfeplay/playcenter/batchgrabred/redToBean"
@@ -568,6 +571,7 @@ def querymyreward(token):
 
 #获取每日浏览天天神券奖励的30豆
 def sendTaskRedBean(token):
+    global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行领取每日30豆的脚本:**\n")
@@ -596,6 +600,7 @@ def sendTaskRedBean(token):
 
 #定义每日签到得必中符函数
 def doAction(token):
+    global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行每日签到领必中符🧧的脚本:**\n")
@@ -625,6 +630,7 @@ def doAction(token):
 #查看道具库中的必中符记录
 def querymyProps(token):
     global propIdforuse
+    global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行查询道具库中必中符🧧详情的脚本:**\n")
@@ -690,6 +696,7 @@ def querymyProps(token):
 
 #定义豆子兑换成必中符函数:
 def exchange(token):
+    global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     wm_actual_latitude = str(wm_latitude)
@@ -735,6 +742,7 @@ def exchange(token):
 
 ###定义查询豆子详情的函数
 def myRedBeanRecords(token):
+    global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行查询豆子变化详情参数脚本**:\n")
@@ -771,6 +779,7 @@ def myRedBeanRecords(token):
 
 #定义查询红包池函数 
 def queryredpool(token):
+    global wm_latitude,wm_longitude
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行查询红包池详情脚本:**\n")
@@ -812,6 +821,7 @@ def queryredpool(token):
    
 #定义pushPlus的消息推送函数
 def pushPlus():
+    global pushPlusToken
     global webhook
     # pushPlusToken = $pushPlusToken
     if not os.path.exists(str(cwd)+r"/output.txt"):
@@ -844,6 +854,7 @@ def pushPlus():
 
 #定义server 酱的消息推送函数
 def serverjiang():
+    global serverkey
     # serverkey = $serverkey
     if not os.path.exists(str(cwd)+r"/output.txt"):
         print("output.txt文件异常,推送退出！🙌")
