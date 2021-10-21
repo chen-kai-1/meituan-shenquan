@@ -854,7 +854,6 @@ def pushPlus():
 
 #定义server 酱的消息推送函数
 def serverjiang():
-    global serverkey
     # serverkey = $serverkey
     if not os.path.exists(str(cwd)+r"/output.txt"):
         print("output.txt文件异常,推送退出！🙌")
