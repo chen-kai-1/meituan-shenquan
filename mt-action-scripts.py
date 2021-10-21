@@ -911,6 +911,8 @@ def main():
     # getpropId_Coinnumber(token)
     sys.stdout = Logger(str(cwd)+r'/output.txt')
     # token = getVar()[2]
+    print(token)
+    print(webhook)
     signForBeans(token)
     #
     queryredpool(token)
