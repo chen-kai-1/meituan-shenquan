@@ -901,7 +901,6 @@ def main():
     sys.stdout = Logger(str(cwd)+r'/output.txt')
     token = getVar()[2]
     signForBeans(token)
-    #
     queryredpool(token)
     batchId = getbatchId(token)
     ##先去保持每天签到 以获得必中符或者豆子

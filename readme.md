@@ -16,6 +16,41 @@
 ### 六.接入第三方微信推送平台 [pushPlus](https://www.pushPlus.plus) 和[server酱](https://sct.ftqq.com/) ###
 ### 七.自动查询红包池红包🧧详情  ###
 # #
+# 新增 github action 云端执行脚本 #
+# #
+### 注意区分版本：带*terminal* 字样的版本为原服务器版本 带*action* 的版本为*github action*调用的版本  ###
+# #
+
+## 顺便说下，pushPlus的官网为[www.pushPlus.plus](https://www.pushPlus.plus) 百度搜索第一的非官方网站，不支持markdown，且pushPlustoken不通用！！ ##
+# #
+## github action 云端运行脚本 使用教程 ##
+### 一、网页右上角**fork**本项目到自己账号下如下图一,再顺便点个star吧[![image.png](https://img30.360buyimg.com/pop/jfs/t1/214322/7/1377/3452/61714f8eE21c76310/02cefd1bb369507c.png)](https://img30.360buyimg.com/pop/jfs/t1/214322/7/1377/3452/61714f8eE21c76310/02cefd1bb369507c.png) ###
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/140574/31/24168/402504/61714e6dE9d6462ed/2367754b705e48e2.png)](https://img30.360buyimg.com/pop/jfs/t1/140574/31/24168/402504/61714e6dE9d6462ed/2367754b705e48e2.png)
+### 二、进入**自己**fork的仓库 ###
+### 进入自己账号 找到自己仓库fork的项目进入，点击setting,如下图  ###
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/165954/27/24804/170394/617150b4E3c458ee5/0917f7afbe504562.png)](https://img30.360buyimg.com/pop/jfs/t1/165954/27/24804/170394/617150b4E3c458ee5/0917f7afbe504562.png)
+### 三、新增秘密变量 ###
+### 点击secret选项，新建三个秘密变量 如下图所示，分别为MTTOKEN、PUSHPLUSTOKEN、SERVERKEY,变量新建后填写对应的值，分别为美团网页版获得的token,pushPlus官方用于微信推送提醒的token，server酱用于微信推送的token,这三个必填且不能为空！！ ###
+
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/207445/26/6171/461209/617154feEa801bcee/9d9fa5fbc72d6812.png)](https://img30.360buyimg.com/pop/jfs/t1/207445/26/6171/461209/617154feEa801bcee/9d9fa5fbc72d6812.png)
+# #
+### 四、action.yml配置文件 自定义修改
+### 回到fork的仓库首页，点击查看./github/workflows/action.yml文件，按照文件注释进行需要的修改，如选择性关闭某个推送或自定义用于企业微信等非默认推送渠道的webhook或者修改定时运行时间。配置文件默认为同时开启pushPlus和server酱推送。配置文件如下图 ###
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/200666/27/12819/411251/61715779Ed1e730f2/e20ca83597e490af.png)](https://img30.360buyimg.com/pop/jfs/t1/200666/27/12819/411251/61715779Ed1e730f2/e20ca83597e490af.png)
+##  五、测试action ##
+### 本action 除了在指定的时间段运行外，可手动点击自己fork的仓库的主页的右上角的**star按钮**运行本脚本,点一次便手动运行一次action脚本,以便用于测试。点击star运行功能只限fork的仓库所有者，其他非所有者无法点击，还请放心！ ###
+# #
+### 点击star后点击首页上方的action即可看到运行结果，若为succes,则脚本运行成功，若您未关闭推送，则可在手机端收到推送！ 后续action会在指定的时间段自动运行！ ###
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/214194/5/1393/47310/61715952E5f7ef6cd/26175c4e93deffa7.png)](https://img30.360buyimg.com/pop/jfs/t1/214194/5/1393/47310/61715952E5f7ef6cd/26175c4e93deffa7.png)
+
+# #
+### 注意事项：无论是服务器版还是action版，若美团token失效(一般为一个月)，脚本均无法推送失效提醒，若您在某天定时时段未收到推送，还请检查服务器或者github action 运行状态，若token失效，只需更新token即可。
+# #
+### 若脚本运行正常但未推送，则为pushPlus和server酱默认使用的微信推送接口永久下线，还请自行换成企业微信推送，pushplus填写webhook在脚本内或action.yml内，server酱填写webhook 在server酱网页端 ###
+
+
+
+# # 
 ## 新增[pushPlus](https://www.pushPlus.plus) 推送 ##
 ###  此推送每天限额200次 对比server酱每天5次的免费推送，推荐使用pushPlus ###
 # #
@@ -84,14 +119,13 @@
 # #
 ### **windows平台设置定时任务计划** ###
 ## 参考[Windows创建计划任务定时执行Python脚本](https://cloud.tencent.com/developer/news/295826)此篇文章 ###
-
+# #
 ## docker 使用提示 ##
+# #
 ###  个人觉得docker是个**伪需求**，套娃python3 环境个人觉得没必要，这个项目又不是用js写的，对环境要求没那么高，若真想使用docker 直接构建一个python3的docker就行或者自己构建个alpine或者ubuntu的docker去装python3，下图为dockerhub的python3镜像，按描述构建后，然后docker exec -it docker的名字 /bin/bash  进入docker 然后安装git, 再git clone  此项目源码，其他的运行和定时任务就和linux实体机一样了 ### 
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/199060/30/13635/365840/616bf9d5Ef8061804/144729685f84dff9.png)](https://img30.360buyimg.com/pop/jfs/t1/199060/30/13635/365840/616bf9d5Ef8061804/144729685f84dff9.png)
-### 很多人真是为了docker 而docker ，pull个镜像遇到网不好直接卡半天，**用docker 的一般都是nas 或者openwrt ，自己实体机装个python3很难吗？** ###
-# #
-## 新合并分支支持githubAction 注意区分版本 一个为终端版 一个为githubAction版 ## 
-##githubAction版暂未**修改完整**，直接运行无法运行，请自行修改或等后续更新 githubAction版本请自行修改配置文件的定时任务时间！ ##
+### 很多人真是为了docker 而docker ，pull个镜像遇到网不好直接卡半天，**用docker 的一般都是nas 或者openwrt ，自己实体机装个python3很难吗？** ### 
+
 #  #
 
 
