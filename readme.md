@@ -34,11 +34,11 @@
 
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/207445/26/6171/461209/617154feEa801bcee/9d9fa5fbc72d6812.png)](https://img30.360buyimg.com/pop/jfs/t1/207445/26/6171/461209/617154feEa801bcee/9d9fa5fbc72d6812.png)
 # #
-### 四、action.yml配置文件 自定义修改
+### 四、action.yml配置文件 选择性自定义修改(非必需)
 ### 回到fork的仓库首页，点击查看./github/workflows/action.yml文件，按照文件注释进行需要的修改，如选择性关闭某个推送或自定义用于企业微信等非默认推送渠道的webhook或者修改定时运行时间。配置文件默认为同时开启pushPlus和server酱推送。配置文件如下图 ###
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/200666/27/12819/411251/61715779Ed1e730f2/e20ca83597e490af.png)](https://img30.360buyimg.com/pop/jfs/t1/200666/27/12819/411251/61715779Ed1e730f2/e20ca83597e490af.png)
 ##  五、测试action ##
-### 本action 除了在指定的时间段运行外，可手动点击自己fork的仓库的主页的右上角的**star按钮**运行本脚本,点一次便手动运行一次action脚本,以便用于测试。点击star运行功能只限fork的仓库所有者，其他非所有者无法点击，还请放心！ ###
+### 本action 除了在指定的时间段运行外，可手动点击自己fork的仓库的主页的右上角的**star按钮**运行本脚本,点击一次star后刷新仓库首页，进入action页面，会发现已经触发了一次action脚本,以便用于测试。点击star运行功能只限fork的仓库所有者，其他非所有者无法点击，还请放心！ ###
 # #
 ### 点击star后点击首页上方的action即可看到运行结果，若为succes,则脚本运行成功，若您未关闭推送，则可在手机端收到推送！ 后续action会在指定的时间段自动运行！ ###
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/214194/5/1393/47310/61715952E5f7ef6cd/26175c4e93deffa7.png)](https://img30.360buyimg.com/pop/jfs/t1/214194/5/1393/47310/61715952E5f7ef6cd/26175c4e93deffa7.png)
