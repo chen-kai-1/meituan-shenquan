@@ -55,35 +55,34 @@ head={"Host": "i.waimai.meituan.com","User-Agent":"MeituanGroup/11.9.208","x-req
 baseurl=r"https://i.waimai.meituan.com"
 #定义 pushPlus 的webhook地址，用于企业微信等渠道的推送，默认为空，若采用企业微信，请手动填写
 global webhook
-webhook = ${{webhook}}
+webhook = sys.argv[1]
 
 #定义全局变量并初始化 以下初始化赋值的变量不要改！！！！
 global propIdforuse
 showPriceNumber = "1"
-wm_latitude =${{wm_latitude}}
-wm_longitude=${{wm_longitude}}
-token =${{token}}
-propId=${{propId}}
-exchangeCoinNumber=1.0
-serverkey=${{serverkey}}
-pushPlusToken =${{pushPlusToken}}
-yesornot = ${{yesornot}}
-yesornot2 = ${{yesornot2}}
+wm_latitude =sys.argv[2]
+wm_longitude=sys.argv[3]
+token =sys.argv[4]
+propId=sys.argv[5]
+exchangeCoinNumber=sys.argv[6]
+serverkey=sys.argv[7]
+pushPlusToken =sys.argv[8]
+yesornot = sys.argv[9]
+yesornot2 = sys.argv[10]
 propIdforuse =2
 cwd = os.path.dirname(os.path.realpath(__file__))
 
 ##############################################################################
 ##标记这四类红包数量不为空，用来在有10元以上必中符时循环判断红包池余量抢购大额元红包，若您不需该功能，请自行将下一行的1改为0
-eight = ten = fifteen = thirty =fifty=${{on}}
+eight = ten = fifteen = thirty =fifty=sys.argv[11]
 ##############################################################################
 # eight_left= 10
 ################################################################################
 #若在您自定义的抢大额红包时间段中，您无法通过10元以上必中符抢到任何红包！！，则请将下面两行数值改大些，如改成10左右的数字
-# ten_left=${ten_left}
-# fifteen_left=${fifteen_left}
-# thirty_left=${thirty_left}
-# fifty_left=${fifty_left}
-
+ten_left=0
+fifteen_left=0
+thirty_left=0
+fifty_left=0
 
 #将print内容同步写到output.txt文件
 class Logger(object):

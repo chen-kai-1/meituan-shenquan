@@ -35,12 +35,12 @@ jobs:
           fifteen_left: 0
           thirty_left : 0
           fifty_left : 0   #上面四行均为必填项目,若在默认开启自动抢15以上红包且有10元以上必中符的情况下，无法抢到必中符保底红包，请手动将上述四行的值改大些
-          wm_latitude : "30657401" #必填项目,此处双引号填写不带小数点的纬度
+          wm_latitude: "30657401" #必填项目,此处双引号填写不带小数点的纬度
           wm_longitude: "104063321" #必填项目,此处双引号填写不带小数点的经度
           propId: "5" #必填项目,此处双引号填写红包豆自动兑换的道具类型,5对应15元必中符，建议填写5即可
           exchangeCoinNumber: "1800" #必填项目,此处双引号填写兑换上一行必中符所需红包豆,建议填写1800即可
         run: |
-          python mt-action-scripts.py 
+          python mt-action-scripts.py ${{webhook}} ${{wm_latitude}} ${{wm_longitude}} ${{token}} ${{propId}} ${{exchangeCoinNumber}} ${{serverkey}} ${{pushPlusToken}} ${{yesornot}} ${{yesornot2}} ${{}} ${{on}}
 
  
     
