@@ -39,7 +39,7 @@ jobs:
           propId: "5" #必填项目,此处双引号填写红包豆自动兑换的道具类型,5对应15元必中符，建议填写5即可
           exchangeCoinNumber: "1800" #必填项目,此处双引号填写兑换上一行必中符所需红包豆,建议填写1800即可
         run: |
-          python mt-action-scripts.py webhook wm_latitude wm_longitude token propId exchangeCoinNumber serverkey pushPlusToken yesornot yesornot2 on
+          python mt-action-scripts.py $webhook $wm_latitude $wm_longitude $token $propId $exchangeCoinNumber $serverkey $pushPlusToken $yesornot $yesornot2 $on
 
  
     
