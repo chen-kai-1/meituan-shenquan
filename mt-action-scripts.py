@@ -453,8 +453,8 @@ def drawlottery(batchId,token,propIdforuse):
 
 #定义接受红包函数，获得红包小于5元时，不执行此函数，并调用redtobean函数自动将红包转为红包豆，若两个函数都不执行，在抢红包成功5分钟左右红包会自动发放到账户
 def acceptRed(batchId,token):
-    wm_latitude = $wm_latitude
-    wm_longitude=$wm_longitude
+    # wm_latitude = $wm_latitude
+    # wm_longitude=$wm_longitude
     print("**开始执行发放天天神券🧧到红包库脚本:**\n")
     datas = "parActivityId="+parActivityId+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+token+"&batchId="+batchId
     url_acceptRed = baseurl+r"/cfeplay/playcenter/batchgrabred/acceptRed"
@@ -814,7 +814,7 @@ def queryredpool(token):
 #定义pushPlus的消息推送函数
 def pushPlus():
     global webhook
-    pushPlusToken = $pushPlusToken
+    # pushPlusToken = $pushPlusToken
     if not os.path.exists(str(cwd)+r"/output.txt"):
         print("output.txt文件异常,推送退出！🙌")
         return -1
