@@ -16,13 +16,21 @@
 ### 六.接入第三方微信推送平台 [pushPlus](https://www.pushPlus.plus) 和[server酱](https://sct.ftqq.com/) ###
 ### 七.自动查询红包池红包🧧详情  ###
 # #
+## 新增控制执行红包豆兑换必中符的条件 ##
+### 如下图所示，只有在红包豆大于设置的数量时才会执行红包豆兑换必中符脚本，避免了之前运行脚本由于红包豆太少一直尝试兑换最低的5元必中符导致红包豆攒不起来的bug。 ###
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/159099/1/28939/362410/61727426E7f6238c1/8a041a5efe9d4b70.png)](https://img30.360buyimg.com/pop/jfs/t1/159099/1/28939/362410/61727426E7f6238c1/8a041a5efe9d4b70.png)
+### action和terminal版本均如图中默认为1800，可无需更改，若满足1800时会去兑换**脚本初始化时设置兑换的必中符**(action默认配置兑换15元必中符)，推荐默认设置兑换15元必中符，即使15被抢完脚本也会自动尝试兑换8元必中符。若需修改，terminal版本修改处如上图所示，aciton 版本在action.yml中修改 
+###
+
+
+# #
 # 新增 github action 云端执行脚本 #
-## 注意：经测试，由于action使用的虚拟机为国外ip,在action短时间频繁运行三四次后token会被美团封禁，导致脚本报错，故不建议使用action!! ##
+###   ###
 ### 注意区分版本：带*terminal* 字样的版本为原服务器版本 带*action* 的版本为*github action*调用的版本  ###
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/173679/32/24244/547697/61716742Edd6cdba7/ded0fd6b1d6f72ec.png)](https://img30.360buyimg.com/pop/jfs/t1/173679/32/24244/547697/61716742Edd6cdba7/ded0fd6b1d6f72ec.png)
 # #
 
-## 顺便说下，pushPlus的官网为[www.pushPlus.plus](https://www.pushPlus.plus) 百度搜索第一的非官方网站，不支持markdown，且pushPlustoken不通用！！ ##
+### 顺便说下，pushPlus的官网为[www.pushPlus.plus](https://www.pushPlus.plus) 百度搜索排名第一的是盗版网站，不支持markdown，且和正版的pushPlustoken不通用！！ ###
 # #
 ## github action 云端运行脚本 使用教程 ##
 ### 一、网页右上角**fork**本项目到自己账号下如下图一,再顺便点个star吧[![image.png](https://img30.360buyimg.com/pop/jfs/t1/214322/7/1377/3452/61714f8eE21c76310/02cefd1bb369507c.png)](https://img30.360buyimg.com/pop/jfs/t1/214322/7/1377/3452/61714f8eE21c76310/02cefd1bb369507c.png) ###

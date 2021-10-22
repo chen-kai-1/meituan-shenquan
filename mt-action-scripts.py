@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #author:fugui
 
-from typing import Text
+from typing import Counter, Text
 import urllib.request
 import ssl
 import json
@@ -38,6 +38,9 @@ global d_time7
 d_time7 = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '11:00', '%Y-%m-%d%H:%M')
 
 
+### 定义红包豆攒到多少数量才会执行兑换必中符脚本，以免一直兑换减5元的必中符
+setexchangedou = int(sys.argv[12])
+
  #关闭ssl校验，用于抓包调试请求
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -58,7 +61,7 @@ global webhook
 webhook = sys.argv[1]
 
 #定义全局变量并初始化 以下初始化赋值的变量不要改！！！！
-global propIdforuse,token,batchId
+global propIdforuse,token,batchId,propId
 showPriceNumber = "1"
 propIdforuse =2
 batchId = "haha"
@@ -71,6 +74,8 @@ serverkey=sys.argv[7]
 pushPlusToken =sys.argv[8]
 yesornot = sys.argv[9]
 yesornot2 = sys.argv[10]
+leftdou=0
+counttime = 0
 cwd = os.path.dirname(os.path.realpath(__file__))
 
 ##############################################################################
@@ -211,34 +216,34 @@ class Logger(object):
 #         file.close
 
 #定义一个云端查询必中符库中所有的propId 和needNumber 的函数，并传给getpropId_Coninnumber()函数作为用户输入参考提示
-def myredbean(token):
-    wm_latitude = 1
-    wm_longitude = 1
-    print("开始执行从美团接口查询propid 和 needNumber参数脚本:\n")
-    datas = "parActivityId="+parActivityId+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+str(token)+"&userPortraitId="+str(portraitId)
-    url_drawlottery = baseurl+r"/cfeplay/playcenter/batchgrabred/myRedBean"
-    request =urllib.request.Request(url_drawlottery,headers=head,data=datas.encode("utf-8"),method="POST")
-    try:
-        response = urllib.request.urlopen(request,timeout=10)
-        result = response.read().decode("utf-8")
-        result2 = json.loads(result)
-        cent = 1
-        if(result2["code"]==0 and result2["subcode"]==0 and len(result2["data"]["propExchangeRuleInfos"])):
-            for k in result2["data"]["propExchangeRuleInfos"]:
-                print("第%d类必中符 所需设置propId参数为%d\t所需红包豆数量为:%d\t总量为%d\n"%(cent,k["propId"],k["needNumber"],k["amount"]))
-                cent=cent+1
-            print("一般这几类必中符金额依次为5元 8元 15元,大概率使用后兑换到20-5，25-8,40-15的红包，建议选择面值最大的一类,即propId填5,所需豆子数量填1800即可\n脚本会自动从设定的面值去尝试兑换，逐级尝试面值，直到兑换成功，所以推荐设置默认兑换15面值的必中符\n注意填写的propId和所需豆子数之间是上方的一一对应关系，错误对应将导致兑换失败!\n")
-        elif (result2["code"]==1 and result2["subcode"]==-1):
-            print("%s,原因:输入token失效或错误 请继续运行程序并输入，脚本将在运行一遍后自动删除异常配置文件!!\n"%(result2["msg"]))
-        else:
-            print("请求接口失效或参数异常，建议🙏重置参数!\n")
-            sys.exit(0)
-    except urllib.error.URLError as e:
-        if hasattr(e,"code"):
-            print("脚本执行失败，错误代码如下:\n")
-            print(e.code)
-        if hasattr(e,"reason"):
-            print(e,"reason")
+# def myredbean():
+#     wm_latitude = 1
+#     wm_longitude = 1
+#     print("开始执行从美团接口查询propid 和 needNumber参数脚本:\n")
+#     datas = "parActivityId="+parActivityId+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+str(token)+"&userPortraitId="+str(portraitId)
+#     url_drawlottery = baseurl+r"/cfeplay/playcenter/batchgrabred/myRedBean"
+#     request =urllib.request.Request(url_drawlottery,headers=head,data=datas.encode("utf-8"),method="POST")
+#     try:
+#         response = urllib.request.urlopen(request,timeout=10)
+#         result = response.read().decode("utf-8")
+#         result2 = json.loads(result)
+#         cent = 1
+#         if(result2["code"]==0 and result2["subcode"]==0 and len(result2["data"]["propExchangeRuleInfos"])):
+#             for k in result2["data"]["propExchangeRuleInfos"]:
+#                 print("第%d类必中符 所需设置propId参数为%d\t所需红包豆数量为:%d\t总量为%d\n"%(cent,k["propId"],k["needNumber"],k["amount"]))
+#                 cent=cent+1
+#             print("一般这几类必中符金额依次为5元 8元 15元,大概率使用后兑换到20-5，25-8,40-15的红包，建议选择面值最大的一类,即propId填5,所需豆子数量填1800即可\n脚本会自动从设定的面值去尝试兑换，逐级尝试面值，直到兑换成功，所以推荐设置默认兑换15面值的必中符\n注意填写的propId和所需豆子数之间是上方的一一对应关系，错误对应将导致兑换失败!\n")
+#         elif (result2["code"]==1 and result2["subcode"]==-1):
+#             print("%s,原因:输入token失效或错误 请继续运行程序并输入，脚本将在运行一遍后自动删除异常配置文件!!\n"%(result2["msg"]))
+#         else:
+#             print("请求接口失效或参数异常，建议🙏重置参数!\n")
+#             sys.exit(0)
+#     except urllib.error.URLError as e:
+#         if hasattr(e,"code"):
+#             print("脚本执行失败，错误代码如下:\n")
+#             print(e.code)
+#         if hasattr(e,"reason"):
+#             print(e,"reason")
 
 #定义获得需要兑换的必中符道具类型和兑换所需的豆子
 # def getpropId_Coinnumber(token):
@@ -360,7 +365,7 @@ def getbatchId():
                 return result2["data"]["batchId"]
             else:
                 print("获取batchId失败👀，当前非限时抢红包时间段,无法进行下一步，但已为您签到完毕🙏!\n")
-                sys.exit(0)
+                os._exit(1)
 
         elif (result2["code"]==1):
             print("%s,接口需提交的token参数已改变👀,请重新运行一遍脚本！\n"%(result2["msg"]))
@@ -369,9 +374,10 @@ def getbatchId():
             # os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
             # os.remove(str(cwd)+r"/serverkey.txt")
             # sys.exit(0)
+            os._exit(1)
         else:
             print("获取batchId错误👀，请检查网络，否则为接口失效！\n")
-            sys.exit(0)
+            os._exit(1)
         
 
 
@@ -385,6 +391,7 @@ def getbatchId():
 
 #定义每天七次签到领豆的函数，需传入获取的token
 def signForBeans():
+    global token
     print("**开始执行签到领豆脚本:** \n")
     datas = "token="+token
     url_signforbeans = baseurl+r"/cfeplay/playcenter/batchgrabred/drawPoints/v2"
@@ -415,7 +422,7 @@ def signForBeans():
 
 #def 限时抢红包函数
 def drawlottery(batchId):
-    global wm_latitude,wm_longitude
+    global wm_latitude,wm_longitude,token
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行限时抢天天神券脚本🧧:**\n")
@@ -458,7 +465,7 @@ def drawlottery(batchId):
 def acceptRed(batchId):
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
-    global wm_latitude,wm_longitude
+    global wm_latitude,wm_longitude,token
     print("**开始执行发放天天神券🧧到红包库脚本:**\n")
     datas = "parActivityId="+parActivityId+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+token+"&batchId="+batchId
     url_acceptRed = baseurl+r"/cfeplay/playcenter/batchgrabred/acceptRed"
@@ -522,6 +529,7 @@ def redtobean(batchId):
 
 #查询已领取到的天天神券
 def querymyreward():
+    global token
     print("**开始执行查询已领天天神券🧧脚本:**\n")
     datas = "parActivityId="+parActivityId+"&token="+token
     url_querymyreward = baseurl+r"/cfeplay/playcenter/batchgrabred/myreward"
@@ -574,7 +582,7 @@ def querymyreward():
 
 #获取每日浏览天天神券奖励的30豆
 def sendTaskRedBean():
-    global wm_latitude,wm_longitude
+    global wm_latitude,wm_longitude,token
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行领取每日30豆的脚本:**\n")
@@ -603,7 +611,7 @@ def sendTaskRedBean():
 
 #定义每日签到得必中符函数
 def doAction():
-    global wm_latitude,wm_longitude
+    global wm_latitude,wm_longitude,token
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行每日签到领必中符🧧的脚本:**\n")
@@ -633,7 +641,7 @@ def doAction():
 #查看道具库中的必中符记录
 def querymyProps():
     global propIdforuse
-    global wm_latitude,wm_longitude
+    global wm_latitude,wm_longitude,token
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行查询道具库中必中符🧧详情的脚本:**\n")
@@ -699,53 +707,44 @@ def querymyProps():
 
 #定义豆子兑换成必中符函数:
 def exchange():
-    global wm_latitude,wm_longitude
-    # wm_latitude = $wm_latitude
-    # wm_longitude=$wm_longitude
+    global propId,wm_latitude,wm_longitude,token
+    # wm_latitude = getVar()[0]
+    # wm_longitude = getVar()[1]
     wm_actual_latitude = str(wm_latitude)
     wm_actual_longitude =str(wm_longitude)
-    # propId = $propId
-    # exchangeCoinNumber = $exchangeCoinNumber
     print("**开始执行每日豆子兑换必中符脚本**:\n")
-    # while(1):
-    datas = "wm_actual_longitude="+wm_actual_longitude+"&wm_actual_latitude="+wm_actual_latitude+"&exchangeRuleId=&propId="+str(propId)+"&exchangeCoinNumber="+str(exchangeCoinNumber)+"&parActivityId="+parActivityId+"&wm_ctype="+wm_ctype+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+token
-    url_exchange = baseurl+r"/cfeplay/playcenter/batchgrabred/exchange"
-    request =urllib.request.Request(url_exchange,headers=head,data=datas.encode("utf-8"),method="POST")
-    try:
-        response = urllib.request.urlopen(request)
-        result = response.read().decode("utf-8")
-        result2 = json.loads(result)
-        if(result2["code"]==0 and result2["subcode"]==0):
-            print("%s,您设置的红包豆兑换指定额度的必中符成功!!!请查看下方道具库详情!😄\n"%(result2["msg"]))
-            # break
-        elif (result2["code"]==1 and result2["subcode"]==13):
-            print("%s\n"%(result2["msg"]))
-            # break
-        elif (result2["code"]==1 and result2["subcode"]==-1):
-            print("%s,您现在的红包豆不足以兑换此类红包!\n正尝试兑换*次一等级*必中符\n"%(result2["msg"]))
-            if(propId==2):
-                print("您现有的红包豆数量太少，无法兑换任何面值的必中符,下次运行时将再次为您尝试!\n")
-                #     break
-                # if(propId ==3):
-                #     propId =2
-                # if(propId==4):
-                #     propId =3
-                # if(propId ==5):
-                #     propId =4
-        elif (result2["code"]==7):
-            print("参数异常或接口已失效\n")
-        else:
-            print("请求接口失效或参数异常，请稍后再试!\n")
-    except urllib.error.URLError as e:
-        if hasattr(e,"code"):
-            print("脚本执行失败👀，错误代码如下:\n")
-            print(e.code)
-        if hasattr(e,"reason"):
-            print(e,"reason")
+    while(1):
+        datas = "wm_actual_longitude="+wm_actual_longitude+"&wm_actual_latitude="+wm_actual_latitude+"&exchangeRuleId=&propId="+str(propId)+"&exchangeCoinNumber="+str(exchangeCoinNumber)+"&parActivityId="+parActivityId+"&wm_ctype="+wm_ctype+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+token
+        url_exchange = baseurl+r"/cfeplay/playcenter/batchgrabred/exchange"
+        request =urllib.request.Request(url_exchange,headers=head,data=datas.encode("utf-8"),method="POST")
+        try:
+            response = urllib.request.urlopen(request,timeout=10)
+            result = response.read().decode("utf-8")
+            result2 = json.loads(result)
+            if(result2["code"]==0 and result2["subcode"]==0):
+                print("%s,您设置的红包豆兑换指定额度的必中符成功!!!请查看下方道具库详情!😄\n"%(result2["msg"]))
+                break
+            elif (result2["code"]==1 and result2["subcode"]==13):
+                print("%s\n"%(result2["msg"]))
+                break
+            elif (result2["code"]==1 and result2["subcode"]==-1):
+                print("%s,您现在的红包豆不足以兑换此类必中符或者此类必中符已被抢完!\n正尝试兑换*次一等级*必中符\n"%(result2["msg"]))
+                if(propId ==5):
+                    propId =4
+                    break
+            elif (result2["code"]==7):
+                print("参数异常或接口已失效\n")
+            else:
+                print("请求接口失效或参数异常，请稍后再试!\n")
+        except urllib.error.URLError as e:
+            if hasattr(e,"code"):
+                print("脚本执行失败👀,准备退出程序，错误代码为:%s\n"%(e.code))
+            if hasattr(e,"reason"):
+               print("脚本执行失败👀,准备退出程序,错误代码为:%s\n"%(e.reason))
 
 ###定义查询豆子详情的函数
-def myRedBeanRecords(token):
-    global wm_latitude,wm_longitude
+def myRedBeanRecords():
+    global wm_latitude,wm_longitude,leftdou,token
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行查询豆子变化详情参数脚本**:\n")
@@ -782,7 +781,7 @@ def myRedBeanRecords(token):
 
 #定义查询红包池函数 
 def queryredpool():
-    global wm_latitude,wm_longitude
+    global wm_latitude,wm_longitude,token
     # wm_latitude = $wm_latitude
     # wm_longitude=$wm_longitude
     print("**开始执行查询红包池详情脚本:**\n")
@@ -809,8 +808,9 @@ def queryredpool():
                     thirty = 0
                 if (round(float(k["showPriceNumberYuan"]))==50 and k["leftStock"]==fifty_left):
                     fifty = 0
-                print("*红包池中%s元总量:%d张,已被领取:%d张,剩余%d张*\n"%(k["showPriceNumberYuan"],k["totalStock"],k["sendStock"],k["leftStock"]))
-                
+                if counttime<3:
+                    sprint("*红包池中%s元总量:%d张,已被领取:%d张,剩余%d张*\n"%(k["showPriceNumberYuan"],k["totalStock"],k["sendStock"],k["leftStock"]))
+                counttime =counttime +1
         elif (result2["code"]==1 and result2["subcode"]==-1):
             print("token失效,导致获取活动信息失败！%s\n"%(result2["msg"]))
         else:
@@ -916,7 +916,11 @@ def main():
     batchId = getbatchId()
     ##先去保持每天签到 以获得必中符或者豆子
     doAction()
-    exchange()   
+    myRedBeanRecords()
+    if leftdou >=setexchangedou:
+        exchange()   
+    else:
+        print("您当前红包豆为%d未满预设的%d数量，不会执行红包豆兑换必中符脚本，多攒几天豆子再来吧!\n"%(leftdou,setexchangedou))   
     querymyProps()
 
     #定义bool类型变量判断当前时间段是不是自定义的大额抢红包时间段
@@ -968,7 +972,7 @@ def main():
                             print("*👴尽力了，等到红包池要关闭了都未等到15元以上大额红包被抢完，开始保底15元，注意查收！*\n")
                             break
                     if ten ==0 :
-                        queryredpool(token)
+                        queryredpool()
                     while ten ==1:
                         if not istimeforbig1:
                             br = 1
@@ -991,7 +995,7 @@ def main():
                             print("*👴尽力了，等到红包池要关闭了都未等到15元以上大额红包被抢完，开始保底15元，注意查收！*\n")
                             break
                     if ten ==0 :
-                        queryredpool(token)
+                        queryredpool()
                     while ten ==1:
                         if not istimeforbig2:
                             br = 1
