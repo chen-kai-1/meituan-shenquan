@@ -4,7 +4,7 @@ on:
   watch:
     types: started
   schedule:
-    - cron: '0 11,17,21 * * *' #github action 采取排队运行机制，可能导致您的定时计划延后，建议自行根据实际运行情况选择调整或推荐使用终端脚本
+    - cron: '0 3,9,13 * * *' #时间已换算，实际为11，17，21点,但github action 采取排队运行机制，可能导致您的定时计划延后，建议自行根据实际运行情况选择调整或推荐使用终端脚本
 jobs:
   mt-action:
     name: my mt-action job
@@ -38,8 +38,9 @@ jobs:
           wm_longitude: "104063321" #必填项目,此处双引号填写不带小数点的经度，此处为成都经度
           propId: "5" #必填项目,此处双引号填写红包豆自动兑换的道具类型,5对应15元必中符，建议填写5即可
           exchangeCoinNumber: "1800" #必填项目,此处双引号填写兑换上一行必中符所需红包豆,建议填写1800即可
+          setexchangedou: "1800" #必填项目,此处双引号填写当红包豆大于等于多少豆时才执行红包豆转必中符脚本,建议填写1800即可,脚本会在抢不到15元必中符时自动兑换8元必中符
         run: |
-          python mt-action-scripts.py $webhook $wm_latitude $wm_longitude $token $propId $exchangeCoinNumber $serverkey $pushPlusToken $yesornot $yesornot2 $on
+          python mt-action-scripts.py $webhook $wm_latitude $wm_longitude $token $propId $exchangeCoinNumber $serverkey $pushPlusToken $yesornot $yesornot2 $on $setexchangedou
 
  
     
