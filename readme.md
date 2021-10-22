@@ -15,6 +15,9 @@
 ### 五.自动查询豆子详情 ###
 ### 六.接入第三方微信推送平台 [pushPlus](https://www.pushPlus.plus) 和[server酱](https://sct.ftqq.com/) ###
 ### 七.自动查询红包池红包🧧详情  ###
+### 八.新增github action 脚本，无服务器等设备推荐使用 ###
+
+
 # #
 ## 新增控制执行红包豆兑换必中符的条件 ##
 ### 如下图所示，只有在红包豆大于设置的数量时才会执行红包豆兑换必中符脚本，避免了之前运行脚本由于红包豆太少一直尝试兑换最低的5元必中符导致红包豆攒不起来的bug。 ###
@@ -27,6 +30,9 @@
 # 新增 github action 云端执行脚本 #
 ###   ###
 ### 注意区分版本：带*terminal* 字样的版本为原服务器版本 带*action* 的版本为*github action*调用的版本  ###
+# #
+### 经过测试,github action 和terminal 均可正常运行，不建议让action或者termina版本 **时刻运行着**，建议按照默认定时任务每天三个时间段即可，否则会被美团后端服务器的nginx插件openresty识别为爬虫并拉黑美团token ###
+# #
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/173679/32/24244/547697/61716742Edd6cdba7/ded0fd6b1d6f72ec.png)](https://img30.360buyimg.com/pop/jfs/t1/173679/32/24244/547697/61716742Edd6cdba7/ded0fd6b1d6f72ec.png)
 # #
 
