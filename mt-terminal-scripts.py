@@ -752,9 +752,9 @@ def myRedBeanRecords(token):
             for k in result2["data"]["redBeanRecordInfos"]:
                 print("exchangeTime:%s\texchangeMessage:%s\texchangeNumber:%s\n"%(k["exchangeTime"],k["exchangeMessage"],k["exchangeNumber"]))
                 cent=cent+1
-                if(cent>10):
+                if(cent>5):
                     break  
-            print("*只显示最近十条红包豆的变化* \n")
+            print("*只显示最近五条红包豆的变化* \n")
         elif (result2["code"]==1 and result2["subcode"]==-1):
             print("%s\n"%(result2["msg"]))
         else:
@@ -984,6 +984,7 @@ def main():
     getlatlongitude()
     getpropId_Coinnumber(token)
     sys.stdout = Logger(str(cwd)+r'/output.txt')
+    print("脚本启动时间:%s\n"%(n_time))  
     token = getVar()[2]
     signForBeans(token)
     queryredpool(token)
