@@ -30,17 +30,14 @@ jobs:
           #若需启用企业微信推送，请自行在fork的项目上设置 秘密环境变量webhook，并将上一行 "～" 覆盖成${{ secrets.webhook }} 并取消上一行注释，取消注释后注意空格缩进对齐
           token: ${{ secrets.MTTOKEN }}   #必填项目,请自行在fork的项目上设置 秘密环境变量，变量含义：美团token
           on: 1  #必填项目,此配置为默认开启在有十元必中符的情况下自动抢15以上红包，若需关闭，请将1改为0，注意勿破坏空格缩进
-          ten_left: 0  
-          fifteen_left: 0
-          thirty_left : 0
-          fifty_left : 0   #上面四行均为必填项目,若在默认开启自动抢15以上红包且有10元以上必中符的情况下，无法抢到必中符保底红包，请手动将上述四行的值改大些
+          left : 0   #必填项目,若在默认开启自动抢15以上红包且有10元以上必中符的情况下，无法抢到必中符保底红包，请手动将该值从0改大些
           wm_latitude: "30657401" #必填项目,此处双引号填写不带小数点的纬度,此处为成都纬度
           wm_longitude: "104063321" #必填项目,此处双引号填写不带小数点的经度，此处为成都经度
           propId: "5" #必填项目,此处双引号填写红包豆自动兑换的道具类型,5对应15元必中符，建议填写5即可
           exchangeCoinNumber: "1800" #必填项目,此处双引号填写兑换上一行必中符所需红包豆,建议填写1800即可
           setexchangedou: "1800" #必填项目,此处双引号填写当红包豆大于等于多少豆时才执行红包豆转必中符脚本,建议填写1800即可,脚本会在抢不到15元必中符时自动兑换8元必中符
         run: |
-          python mt-action-scripts.py $webhook $wm_latitude $wm_longitude $token $propId $exchangeCoinNumber $serverkey $pushPlusToken $yesornot $yesornot2 $on $setexchangedou
+          python mt-action-scripts.py
 
  
     

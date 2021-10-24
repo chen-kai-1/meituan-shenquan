@@ -268,12 +268,12 @@ def getpropId_Coinnumber(token):
 #定义从文本文件中获取存入变量的函数,第二次运行时不用输入，若需改变经纬度和token，则直接删除文件即可
 def getVar():
     if not os.path.exists(str(cwd)+r"/wm_latitudewm_longitude.txt"):
-        print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
-        os.remove(str(cwd)+r"/token.txt")
-        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
-        os.remove(str(cwd)+r"/serverkey.txt")
-        os.remove(str(cwd)+r"/pushPlusToken.txt")
+        print("程序运行中配置文件异常,文件或者权限异常,已自动为您停止程序!\n")
+        # os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        # os.remove(str(cwd)+r"/token.txt")
+        # os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        # os.remove(str(cwd)+r"/serverkey.txt")
+        # os.remove(str(cwd)+r"/pushPlusToken.txt")
         sys.exit(0)
     file1 = open(str(cwd)+r"/wm_latitudewm_longitude.txt", mode='r',encoding="UTF-8")
     wm_latitude  = int(file1.readline())
@@ -282,23 +282,23 @@ def getVar():
 
     file2 = open(str(cwd)+r"/token.txt", mode='r',encoding="UTF-8")
     if not os.path.exists(str(cwd)+r"/token.txt"):
-        print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
-        os.remove(str(cwd)+r"/token.txt")
-        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
-        os.remove(str(cwd)+r"/serverkey.txt")
-        os.remove(str(cwd)+r"/pushPlusToken.txt")
+        print("程序运行中配置文件异常,文件或者权限异常,已自动为您停止程序!\n")
+        # os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        # os.remove(str(cwd)+r"/token.txt")
+        # os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        # os.remove(str(cwd)+r"/serverkey.txt")
+        # os.remove(str(cwd)+r"/pushPlusToken.txt")
         sys.exit(0)
     token  = file2.readline()
     file2.close()
 
     if not os.path.exists(str(cwd)+r"/propId_Coinnumbe.txt"):
-        print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
-        os.remove(str(cwd)+r"/token.txt")
-        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
-        os.remove(str(cwd)+r"/serverkey.txt")
-        os.remove(str(cwd)+r"/pushPlusToken.txt")
+        print("程序运行中配置文件异常,文件或者权限异常,已自动为您停止程序!\n")
+        # os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        # os.remove(str(cwd)+r"/token.txt")
+        # os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        # os.remove(str(cwd)+r"/serverkey.txt")
+        # os.remove(str(cwd)+r"/pushPlusToken.txt")
         sys.exit(0)
     file3 = open(str(cwd)+r"/propId_Coinnumbe.txt", mode='r',encoding="UTF-8")
     propId  = int(file3.readline())
@@ -313,12 +313,12 @@ def getVar():
 def pushPlusTokenvar():
     global pushPlusToken
     if not os.path.exists(str(cwd)+r"/pushPlusToken.txt"):
-        print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
-        os.remove(str(cwd)+r"/token.txt")
-        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
-        os.remove(str(cwd)+r"/serverkey.txt")
-        os.remove(str(cwd)+r"/pushPlusToken.txt")
+        print("程序运行中配置文件异常,文件或者权限异常,已自动为您停止程序!\n")
+        # os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        # os.remove(str(cwd)+r"/token.txt")
+        # os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        # os.remove(str(cwd)+r"/serverkey.txt")
+        # os.remove(str(cwd)+r"/pushPlusToken.txt")
         sys.exit(0)
     file = open(str(cwd)+r"/pushPlusToken.txt", mode='r',encoding="UTF-8")
     pushPlusToken  = file.readline()
@@ -331,12 +331,12 @@ def pushPlusTokenvar():
 def serverkeyvar():
     global serverkey
     if not os.path.exists(str(cwd)+r"/serverkey.txt"):
-        print("程序运行中配置文件异常,文件或者权限异常,已自动为您删除脚本目录下所有已生成的txt文档并停止程序!\n")
-        os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
-        os.remove(str(cwd)+r"/token.txt")
-        os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
-        os.remove(str(cwd)+r"/serverkey.txt")
-        os.remove(str(cwd)+r"/pushPlusToken.txt")
+        print("程序运行中配置文件异常,文件或者权限异常,已自动为您停止程序!\n")
+        # os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+        # os.remove(str(cwd)+r"/token.txt")
+        # os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+        # os.remove(str(cwd)+r"/serverkey.txt")
+        # os.remove(str(cwd)+r"/pushPlusToken.txt")
         sys.exit(0)
     file = open(str(cwd)+r"/serverkey.txt", mode='r',encoding="UTF-8")
     serverkey  = file.readline()
@@ -346,13 +346,14 @@ def serverkeyvar():
     
 #定义获取batchId的函数
 def getbatchId(token):
+    global expire
     wm_latitude = getVar()[0]
     wm_longitude = getVar()[1]
     print("**开始执行获取batchId脚本:**\n")
-    datas = "parActivityId="+parActivityId+"&wm_ctype="+wm_ctype+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+token
-    url_getbatchId = baseurl+r"/cfeplay/playcenter/batchgrabred/corepage"
-    request =urllib.request.Request(url_getbatchId,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
+        datas = "parActivityId="+parActivityId+"&wm_ctype="+wm_ctype+"&wm_latitude="+str(wm_latitude)+"&wm_longitude="+str(wm_longitude)+"&token="+token
+        url_getbatchId = baseurl+r"/cfeplay/playcenter/batchgrabred/corepage"
+        request =urllib.request.Request(url_getbatchId,headers=head,data=datas.encode("utf-8"),method="POST")
         response = urllib.request.urlopen(request,timeout=10)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
@@ -360,32 +361,28 @@ def getbatchId(token):
         # print(result2["code"])
         if(result2["code"]==0):
             if "batchId" in result2["data"]:
+                expire = 1
                 print("batchId:%s\n"%(result2["data"]["batchId"]))
                 return result2["data"]["batchId"]
             else:
+                expire =2
                 print("获取batchId失败👀，当前非限时抢红包时间段,无法进行下一步，但已为您签到完毕🙏!\n")
-                os._exit(1)
-
 
         elif (result2["code"]==1):
             print("%s,接口需提交的token参数已改变👀,请重新运行一遍脚本！\n"%(result2["msg"]))
-            os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
-            os.remove(str(cwd)+r"/token.txt")
-            os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
-            os.remove(str(cwd)+r"/serverkey.txt")
-            os.remove(str(cwd)+r"/pushPlusToken.txt")
-            os._exit(1)
+            # os.remove(str(cwd)+r"/wm_latitudewm_longitude.txt")
+            # os.remove(str(cwd)+r"/token.txt")
+            # os.remove(str(cwd)+r"/propId_Coinnumbe.txt")
+            # os.remove(str(cwd)+r"/serverkey.txt")
+            # os.remove(str(cwd)+r"/pushPlusToken.txt")
+
         else:
             print("获取batchId错误👀，请检查网络，否则为接口失效！\n")
-            os._exit(1)
-        
-
 
     except urllib.error.URLError as e:
         if hasattr(e,"code"):
-            print(e.code)
-        if hasattr(e,"reason"):
-            print(e,"reason")
+
+            print("脚本执行失败👀，错误代码为%s\n"%(e.code))
 
 
 
@@ -782,7 +779,7 @@ def queryredpool(token):
     url_myredbeanRecords = baseurl+r"/cfeplay/playcenter/batchgrabred/corepage"
     request =urllib.request.Request(url_myredbeanRecords,headers=head,data=datas.encode("utf-8"),method="POST")
     try:
-        global eight,ten,fifteen,thirty,fifty,eight_left,ten_left,fifteen_left,thirty_left,fifty_left
+        global eight,ten,fifteen,thirty,fifty,ten_left,fifteen_left,thirty_left,fifty_left
         response = urllib.request.urlopen(request)
         result = response.read().decode("utf-8")
         result2 = json.loads(result)
@@ -894,6 +891,89 @@ def serverjiang():
         if hasattr(e,"reason"):
             print(e,"reason") 
 
+
+#定义pushPlus的消息推送函数
+def pushPlusforexpire():
+    global webhook
+    pushPlusToken = pushPlusTokenvar()
+    if not os.path.exists(str(cwd)+r"/output.txt"):
+        print("output.txt文件异常,推送退出！🙌")
+        return -1
+    message = "### 尊敬的天天神券脚本用户: ###\n\n**若您收到此推送,则代表您之前部署在服务器上的美团网页cookie 由于请求过快被拉黑或者使用时间过长到期!**\n\n **若您想继续使用本脚本服务，还请按照[readme.md](https://github.com/fuguiKz/meituan-shenquan)手动获取cookie并覆盖原配置文件进行更新!**\n\n"
+
+    
+    pushurl="https://www.pushplus.plus/send"
+    head_server ={"Host": "www.pushplus.plus","User-Agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Mobile Safari/537.36","content-type":"application/x-www-form-urlencoded"}
+    print("**开始执行pushPlus推送脚本:**\n")
+    datas=bytes(urllib.parse.urlencode({"title":"token失效告警","content":message,"token":pushPlusToken,"template":"markdown","channel":"wechat","webhook":webhook,"callbackUrl":""}),encoding="UTF-8")
+    request =urllib.request.Request(pushurl,headers=head_server,data=datas,method="POST")
+    try:
+        response = urllib.request.urlopen(request,timeout=30)
+        result = response.read().decode("utf-8")
+        result2 = json.loads(result)
+        if(result2["code"]==200) :
+            print("pushPlus消息推送成功!\n\n")
+        else:
+            print("请求接口失效或参数异常，疑似用户取消关注，建议重置参数!\n")
+    except  urllib.error.URLError as e:
+        if  hasattr(e,"code"):
+            print("脚本执行失败，错误代码如下:\n")
+            print(e.code)
+        if hasattr(e,"reason"):
+            print(e,"reason") 
+
+
+
+
+#定义server 酱的消息推送函数
+def serverjiangforexpire():
+    serverkey = serverkeyvar()
+    if not os.path.exists(str(cwd)+r"/output.txt"):
+        print("output.txt文件异常,推送退出！🙌")
+        return -1
+    message = "### 尊敬的天天神券脚本用户: ###\n\n**若您收到此推送,则代表您之前部署在服务器上的美团网页cookie 由于请求过快被拉黑或者使用时间过长到期!**\n\n **若您想继续使用本脚本服务，还请按照[readme.md](https://github.com/fuguiKz/meituan-shenquan)手动获取cookie并覆盖原配置文件进行更新!**\n\n"
+    pushurl="https://sctapi.ftqq.com/"
+    head_server ={"Host": "sctapi.ftqq.com","User-Agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Mobile Safari/537.36","content-type":"application/x-www-form-urlencoded"}
+    url_serverkey = pushurl+serverkey+".send"
+    print("**开始执行server酱推送脚本:**\n")
+    datas=bytes(urllib.parse.urlencode({"title":"token失效告警","desp":message,"channel":""}),encoding="UTF-8")
+    request =urllib.request.Request(url_serverkey,headers=head_server,data=datas,method="POST")
+    try:
+        response = urllib.request.urlopen(request,timeout=30)
+        result = response.read().decode("utf-8")
+        result2 = json.loads(result)
+        if(result2["code"]==0) :
+            pushid = result2["data"]["pushid"]
+            readkey = result2["data"]["readkey"]
+            url_checkurl = pushurl+"push?id="+pushid+"&readkey="+readkey
+            request2 = urllib.request.Request(url_checkurl,headers=head_server,data=datas)
+            try:
+                response2 = urllib.request.urlopen(request2,timeout=30)
+                text=json.loads(response2.read().decode("utf-8"))
+                if(text["data"]["title"] =="token失效告警"):
+                    print("server酱推送成功😄！请在移动设备端查看\n")
+                else:
+                    print("server酱推送失败👀，请检查serverkey是否正确！\n")
+
+            except urllib.error.URLError as e2:
+                if hasattr(e2,"code"):
+                    print("脚本执行失败👀，错误代码如下:\n")
+                print(e2.code)
+                if hasattr(e2,"reason"):
+                    print(e2,"reason") 
+        else:
+            print("请求接口失效或参数异常，建议重置参数!\n")
+    except  urllib.error.URLError as e:
+        if  hasattr(e,"code"):
+            print("脚本执行失败，错误代码如下:\n")
+            print(e.code)
+        if hasattr(e,"reason"):
+            print(e,"reason") 
+
+
+
+
+
 def main():
     global propIdforuse
     temp = sys.stdout
@@ -908,10 +988,17 @@ def main():
     signForBeans(token)
     queryredpool(token)
     batchId = getbatchId(token)
-    ##先去保持每天签到 以获得必中符或者豆子
-    if batchId == None:
-        print("当前平台不能正常退出，")
+    if expire ==0:
+        # print (yesornot)
+        # print (yesornot2)
+        if yesornot =="y":
+            serverjiangforexpire()
+        if yesornot2 =="y":
+            pushPlusforexpire()
         sys.exit(0)
+    if expire ==2:
+        sys.exit(0)
+
     doAction(token)
     myRedBeanRecords(token)
     if leftdou >=setexchangedou:
