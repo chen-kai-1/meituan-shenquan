@@ -16,7 +16,16 @@
 ### 六.接入第三方微信推送平台 [pushPlus](https://www.pushPlus.plus) 和[server酱](https://sct.ftqq.com/) ###
 ### 七.自动查询红包池红包🧧详情  ###
 ### 八.新增github action 脚本，无服务器等设备推荐使用 ###
+# #
+# github action 版本兼容腾讯云函数 #
+###  action版本部署方式与下方原教程不变。若需部署在腾讯云上，只需在腾讯云新增环境变量和设置触发cron 定时计划即可，腾讯云函数环境变量如下，共十三个环境变量，具体解释参考action的配置文件action.yml。具体操作如下图 ###
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/211226/34/6434/249717/6174deddEb3d7f099/1df31eaf73bdffec.png)](https://img30.360buyimg.com/pop/jfs/t1/211226/34/6434/249717/6174deddEb3d7f099/1df31eaf73bdffec.png)
 
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/16729/37/19210/131710/6174dfc1Edcf146de/ad28e3faa050990b.png)](https://img30.360buyimg.com/pop/jfs/t1/16729/37/19210/131710/6174dfc1Edcf146de/ad28e3faa050990b.png)
+###  在代码编辑区将原本所有代码覆盖为action版本中代码，再在最后新增下图主函数段即可  ###
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/156025/23/21443/385889/6174f484E701c53eb/8890227961e10dc7.png)](https://img30.360buyimg.com/pop/jfs/t1/156025/23/21443/385889/6174f484E701c53eb/8890227961e10dc7.png)
+### 最后滚动网页到代码编辑区下方，点击代码区下方的测试即可，如下图 ,后续脚本会在定时时间段运行 ###
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/199247/38/14388/410504/6174f6abE86bc8280/0d377fd6b27706de.png)](https://img30.360buyimg.com/pop/jfs/t1/199247/38/14388/410504/6174f6abE86bc8280/0d377fd6b27706de.png)
 
 # #
 ## 新增控制执行红包豆兑换必中符的条件 ##
@@ -24,7 +33,10 @@
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/159099/1/28939/362410/61727426E7f6238c1/8a041a5efe9d4b70.png)](https://img30.360buyimg.com/pop/jfs/t1/159099/1/28939/362410/61727426E7f6238c1/8a041a5efe9d4b70.png)
 ### action和terminal版本均如图中默认为1800，可无需更改，若满足1800时会去兑换**脚本初始化时设置兑换的必中符**(action默认配置兑换15元必中符)，推荐默认设置兑换15元必中符，即使15被抢完脚本也会自动尝试兑换8元必中符。若需修改，terminal版本修改处如上图所示，aciton 版本在action.yml中修改 
 ###
-
+# #
+## 新增token失效告警功能 ##
+### 注意事项：action版本(兼容腾讯云函数)和terminal 服务器版本均新增token失效告警功能，在token失效后会自动提示，具体效果如下 ###
+[![image.png](https://img30.360buyimg.com/pop/jfs/t1/161269/18/22183/208639/6174f5a1E35f61377/38ac52f06868ad79.png)](https://img30.360buyimg.com/pop/jfs/t1/161269/18/22183/208639/6174f5a1E35f61377/38ac52f06868ad79.png)
 
 # #
 # 新增 github action 云端执行脚本 #
@@ -59,9 +71,7 @@
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/214194/5/1393/47310/61715952E5f7ef6cd/26175c4e93deffa7.png)](https://img30.360buyimg.com/pop/jfs/t1/214194/5/1393/47310/61715952E5f7ef6cd/26175c4e93deffa7.png)
 
 # #
-### 注意事项：无论是服务器版还是action版，若美团token失效(一般为一个月)，脚本均无法推送失效提醒，若您在某天定时时段未收到推送，还请检查服务器或者github action 运行状态，若token失效，只需更新token即可。
-# #
-### 若脚本运行正常但未推送，则为pushPlus和server酱默认使用的微信推送接口永久下线，还请自行换成企业微信推送，pushplus填写webhook在脚本内或action.yml内，server酱填写webhook 在server酱网页端 ###
+### 注意事项：若未来某一天action版本(兼容腾讯云函数)和terminal 服务器版本若正常运行但一直不推送，则为pushPlus和server酱默认使用的微信推送接口永久下线，还请自行换成企业微信推送，pushplus填写webhook在脚本内或action.yml内，server酱填写webhook 在server酱网页端 ###
 
 
 
@@ -95,12 +105,12 @@
 # #
 [![image.png](https://img30.360buyimg.com/pop/jfs/t1/198361/27/13260/202683/616988e0Edf077ba8/e2db2244bc9c9def.png)](https://img30.360buyimg.com/pop/jfs/t1/198361/27/13260/202683/616988e0Edf077ba8/e2db2244bc9c9def.png)
 # #
-## 使用说明 ##
+## terminal服务器版本使用说明 ##
 ### 将脚本部署在服务器或者nas openwrt 或者潘多拉路由器 群晖等可读写文件的平台上,本脚本只在服务器上测试通过。若需在腾讯云函数平台请自行修改源码中参数，否则无法运行在腾讯云函数等无法读取文件的云函数平台 ###
 # #
 # #
 ### 首次执行脚本需按提示输入参数，后续即可自动读取脚本所在目录的配置文件 ###
-## **即设置crontab等定时计划前一定要手动运行一遍脚本记录token等参数 ！！** ##
+## **即terminal版本设置crontab等定时计划前一定要手动运行一遍脚本记录token等参数 ！！** ##
 ### 本脚本接入server 酱微信推送 ,为节约每天免费5条的推送额度，故本脚本将只在早上11点后进行消息推送 ### 
 # #
 ## 美团token获取方法 ##
