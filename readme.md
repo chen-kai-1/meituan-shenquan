@@ -1,3 +1,8 @@
+
+1.16更新
+
+
+
 # 美团限时抢红包 天天神券 脚本 #
 [![followers](https://img.shields.io/badge/dynamic/json?color=%09%2300BFFF&label=Github&prefix=followers%3A&query=%24.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dgithub%26queryKey%3DfuguiKz)](https://img.shields.io/badge/dynamic/json?color=%09%2300BFFF&label=Github&prefix=followers%3A&query=%24.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dgithub%26queryKey%3DfuguiKz)
 [![author:fugui](https://img.shields.io/badge/author-fuguiKz-brightgreen)](https://img.shields.io/badge/author-fuguiKz-brightgreen)
