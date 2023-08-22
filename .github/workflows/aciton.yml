@@ -24,7 +24,7 @@ jobs:
         env:
           serverkey: ${{ secrets.SERVERKEY }}     #必填项目,请自行在fork的项目上设置 秘密环境变量，变量含义：server 酱推送所用token
           pushPlusToken: ${{ secrets.PUSHPLUSTOKEN }} #必填项目,请自行在fork的项目上设置 秘密环境变量，变量含义：pushPlus推送所用token
-          yesornot: "n" #必填项目,双引号内填写n则代表不开启server酱推送,填写n则开启推送
+          yesornot: "y" #必填项目,双引号内填写n则代表不开启server酱推送,填写n则开启推送
           yesornot2: "y" #必填项目,双引号内填写n则代表不开启pushPlus推送,填写n则开启推送
           webhook: "~"       #选填项目,变量含义：用于pushPlus 企业微信推等其他推送渠道所用，默认推送渠道无需设置注释即可
           #若需启用企业微信推送，请自行在fork的项目上设置 秘密环境变量webhook，并将上一行 "～" 覆盖成${{ secrets.webhook }} 并取消上一行注释，取消注释后注意空格缩进对齐
